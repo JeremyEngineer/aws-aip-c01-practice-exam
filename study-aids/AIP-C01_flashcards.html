@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIP-C01 Flash Cards — AWS Certified Generative AI Developer (Pro)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d1117;
+    --bg2:#11161f;
+    --panel:#161c27;
+    --panel2:#1b2331;
+    --ink:#e8edf4;
+    --ink-dim:#9aa7b8;
+    --ink-faint:#6b7888;
+    --line:#27303d;
+    --line2:#323d4d;
+    --amber:#ff9900;
+    --amber-soft:#ffb340;
+    --teal:#34d6c4;
+    --green:#3fb950;
+    --red:#f0826d;
+    --shadow:0 24px 60px -20px rgba(0,0,0,.7);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Hanken Grotesk',system-ui,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1100px 620px at 82% -8%, rgba(255,153,0,.10), transparent 60%),
+      radial-gradient(900px 600px at 8% 108%, rgba(52,214,196,.07), transparent 60%),
+      var(--bg);
+    background-attachment:fixed;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  /* subtle grid texture */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+    background-size:46px 46px;
+    mask-image:radial-gradient(circle at 50% 30%, #000 0%, transparent 78%);
+  }
+  .wrap{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:34px 22px 70px}
+
+  /* ---------- header ---------- */
+  header.top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px}
+  .brand{display:flex;flex-direction:column;gap:7px}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--amber);display:flex;align-items:center;gap:9px;font-weight:500;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 12px var(--amber)}
+  h1{
+    font-family:'Bricolage Grotesque',sans-serif;font-weight:800;line-height:1.0;
+    font-size:clamp(26px,4.6vw,40px);letter-spacing:-.02em;
+  }
+  h1 .thin{color:var(--ink-dim);font-weight:500}
+  .subtitle{font-size:13.5px;color:var(--ink-faint);font-family:'JetBrains Mono',monospace;letter-spacing:.01em}
+
+  .scorebox{
+    display:flex;gap:10px;align-items:stretch;
+  }
+  .stat{
+    background:linear-gradient(180deg,var(--panel),var(--bg2));
+    border:1px solid var(--line);border-radius:14px;padding:11px 15px;min-width:74px;text-align:center;
+  }
+  .stat .n{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:21px;line-height:1}
+  .stat .l{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-top:5px}
+  .stat.known .n{color:var(--green)}
+  .stat.review .n{color:var(--amber-soft)}
+
+  /* ---------- filter chips ---------- */
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .chip{
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.02em;
+    color:var(--ink-dim);background:var(--panel);border:1px solid var(--line);
+    padding:7px 13px;border-radius:999px;cursor:pointer;transition:.16s ease;white-space:nowrap;
+  }
+  .chip:hover{border-color:var(--line2);color:var(--ink)}
+  .chip.active{background:var(--amber);color:#1a1206;border-color:var(--amber);font-weight:700}
+  .chip .c{opacity:.6;margin-left:6px}
+  .chip.active .c{opacity:.75}
+
+  /* ---------- card ---------- */
+  .stage{perspective:2200px;margin-bottom:20px}
+  .card{
+    position:relative;width:100%;min-height:430px;cursor:pointer;
+    transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.7,.2,1);
+  }
+  .card.flipped{transform:rotateY(180deg)}
+  .face{
+    position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+    border-radius:22px;border:1px solid var(--line);
+    background:linear-gradient(168deg,var(--panel) 0%,var(--bg2) 100%);
+    box-shadow:var(--shadow);
+    padding:30px 32px;display:flex;flex-direction:column;overflow:hidden;
+  }
+  .face::after{ /* corner glow */
+    content:"";position:absolute;width:240px;height:240px;border-radius:50%;
+    top:-120px;right:-90px;background:radial-gradient(circle,rgba(255,153,0,.13),transparent 70%);pointer-events:none;
+  }
+  .back{transform:rotateY(180deg);background:linear-gradient(168deg,var(--panel2) 0%,#12161e 100%)}
+  .back::after{background:radial-gradient(circle,rgba(52,214,196,.12),transparent 70%);top:-120px;right:auto;left:-90px}
+
+  .face-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;position:relative;z-index:2}
+  .cat{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--amber);border:1px solid rgba(255,153,0,.35);background:rgba(255,153,0,.06);
+    padding:5px 11px;border-radius:7px;font-weight:500;
+  }
+  .side-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint)}
+  .back .cat{color:var(--teal);border-color:rgba(52,214,196,.35);background:rgba(52,214,196,.06)}
+
+  .q-label,.a-label{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-faint);margin-bottom:12px;position:relative;z-index:2;
+  }
+  .a-label{color:var(--teal)}
+  .question{
+    font-family:'Bricolage Grotesque',sans-serif;font-weight:700;letter-spacing:-.01em;
+    font-size:clamp(19px,2.7vw,25px);line-height:1.3;color:var(--ink);position:relative;z-index:2;
+    display:flex;align-items:center;flex:1;
+  }
+  .answer-wrap{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;gap:16px;overflow-y:auto}
+  .answer{font-size:16.5px;line-height:1.5;color:var(--ink);font-weight:500}
+  .answer strong{color:var(--amber-soft);font-weight:700}
+  .why{
+    border-left:2px solid var(--line2);padding:11px 0 4px 15px;
+    font-size:14.5px;line-height:1.55;color:var(--ink-dim);
+  }
+  .why .wl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);display:block;margin-bottom:6px}
+  .why strong{color:var(--ink);font-weight:600}
+
+  .flip-hint{
+    position:absolute;bottom:18px;left:32px;right:32px;z-index:2;
+    display:flex;align-items:center;justify-content:space-between;
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-faint);letter-spacing:.05em;
+  }
+  .flip-hint .kbd{border:1px solid var(--line2);border-radius:5px;padding:2px 7px;color:var(--ink-dim);background:rgba(255,255,255,.02)}
+
+  /* ---------- controls ---------- */
+  .controls{display:flex;align-items:center;justify-content:center;gap:11px;flex-wrap:wrap}
+  button.ctrl{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:500;letter-spacing:.04em;
+    color:var(--ink);background:var(--panel);border:1px solid var(--line);
+    padding:12px 18px;border-radius:12px;cursor:pointer;transition:.15s ease;display:flex;align-items:center;gap:8px;
+  }
+  button.ctrl:hover{border-color:var(--line2);background:var(--panel2);transform:translateY(-1px)}
+  button.ctrl:active{transform:translateY(0)}
+  button.ctrl.primary{background:var(--amber);color:#1a1206;border-color:var(--amber);font-weight:700}
+  button.ctrl.primary:hover{background:var(--amber-soft)}
+  button.ctrl.known.on{background:rgba(63,185,80,.16);border-color:var(--green);color:var(--green)}
+  button.ctrl svg{width:15px;height:15px;display:block}
+  .counter{
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink-dim);
+    min-width:84px;text-align:center;letter-spacing:.06em;
+  }
+  .counter b{color:var(--ink);font-weight:700}
+
+  /* progress bar */
+  .progress{height:4px;background:var(--line);border-radius:999px;overflow:hidden;margin:18px 0 22px}
+  .progress .bar{height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--amber-soft));transition:width .3s ease;border-radius:999px}
+
+  .foot{margin-top:30px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);letter-spacing:.04em;line-height:1.7}
+  .foot .sep{opacity:.4;margin:0 8px}
+
+  @media (max-width:560px){
+    .face{padding:24px 22px}
+    .flip-hint{left:22px;right:22px}
+    .card{min-height:470px}
+    .scorebox{width:100%}
+    .stat{flex:1}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <span class="eyebrow"><span class="dot"></span>AWS Certified GenAI Developer — Professional</span>
+      <h1>AIP-C01 <span class="thin">Flash Cards</span></h1>
+      <span class="subtitle">// concept-driven review · tap a card to flip</span>
+    </div>
+    <div class="scorebox">
+      <div class="stat"><div class="n" id="statTotal">0</div><div class="l">In Deck</div></div>
+      <div class="stat known"><div class="n" id="statKnown">0</div><div class="l">Mastered</div></div>
+    </div>
+  </header>
+
+  <div class="filters" id="filters"></div>
+
+  <div class="progress"><div class="bar" id="bar"></div></div>
+
+  <div class="stage">
+    <div class="card" id="card">
+      <div class="face front">
+        <div class="face-head">
+          <span class="cat" id="fCat">—</span>
+          <span class="side-tag">Prompt</span>
+        </div>
+        <div class="q-label">Question</div>
+        <div class="question" id="fQ">Loading…</div>
+        <div class="flip-hint">
+          <span>tap / <span class="kbd">space</span> to reveal</span>
+          <span id="fIndex">01</span>
+        </div>
+      </div>
+      <div class="face back">
+        <div class="face-head">
+          <span class="cat" id="bCat">—</span>
+          <span class="side-tag">Answer</span>
+        </div>
+        <div class="answer-wrap">
+          <div class="a-label">Correct approach</div>
+          <div class="answer" id="bA"></div>
+          <div class="why"><span class="wl">Why / what it isn't</span><span id="bW"></span></div>
+        </div>
+        <div class="flip-hint">
+          <span><span class="kbd">←</span> prev <span class="kbd">→</span> next</span>
+          <span id="bIndex">01</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="ctrl" id="prev" title="Previous (←)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      Prev
+    </button>
+    <button class="ctrl primary" id="flip" title="Flip (space)">Flip card</button>
+    <span class="counter"><b id="cNow">1</b> / <span id="cTot">1</span></span>
+    <button class="ctrl known" id="know" title="Mark mastered (M)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      Mastered
+    </button>
+    <button class="ctrl" id="next" title="Next (→)">
+      Next
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <button class="ctrl" id="shuffle" title="Shuffle (S)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+      Shuffle
+    </button>
+  </div>
+
+  <div class="foot">
+    34 concept cards · drawn from the 20-question AIP-C01 practice set
+    <span class="sep">·</span> <span class="kbd" style="font-family:inherit">space</span> flip · <span class="kbd" style="font-family:inherit">← →</span> navigate · <span class="kbd" style="font-family:inherit">M</span> master · <span class="kbd" style="font-family:inherit">S</span> shuffle
+    <br>Made for studying — verify against current AWS docs before exam day.
+  </div>
+</div>
+
+<script>
+const CARDS = [
+  // ---------- Vector & Search ----------
+  {cat:"Vector & Search", q:"When should you choose Amazon S3 Vectors over OpenSearch Serverless for vector storage?",
+   a:"<strong>S3 Vectors</strong> — when searches are <strong>infrequent</strong> and cost matters. Fully managed, serverless, scales to billions of vectors, pay only for what you use (e.g. 50M image embeddings searched occasionally).",
+   w:"OpenSearch Serverless is built for high-throughput, low-latency, <strong>frequent</strong> search — you pay for provisioned capacity that sits idle when searches are rare. Driver: cost-effective + infrequent + no infra management."},
+
+  {cat:"Vector & Search", q:"Why not DynamoDB or RDS/Aurora pgvector for a 50M-image, infrequent similarity search?",
+   a:"Neither fits <strong>serverless + cost-effective + no infrastructure</strong>. S3 Vectors is the pay-per-use, fully managed choice.",
+   w:"DynamoDB has no native vector search — you'd build custom Lambda logic (latency + compute cost). RDS/Aurora pgvector require provisioning and managing DB instances and aren't economical for infrequent workloads."},
+
+  {cat:"Vector & Search", q:"OpenSearch Serverless vs OpenSearch Service — how does each show up in Bedrock RAG?",
+   a:"<strong>Serverless</strong>: managed vector store for Knowledge Bases hybrid search, no capacity to manage. <strong>Service</strong> (managed domain): vector store paired with Bedrock reranker models to reorder results.",
+   w:"Both can back RAG. Serverless removes capacity planning; Service is a managed cluster you still size and configure. Choose Serverless when you want zero capacity management."},
+
+  // ---------- RAG ----------
+  {cat:"RAG", q:"A RAG app retrieves the right docs, but the BEST info ranks too low. Fix with minimal overhead — two steps?",
+   a:"(1) <strong>Bedrock reranker models</strong> — reorder results by semantic query–document relevance. (2) <strong>Knowledge Bases hybrid search</strong> — combine vector embeddings + keyword matching (OpenSearch Serverless).",
+   w:"Avoid OpenSearch Learning-to-Rank or custom pgvector scoring — both need trained/maintained custom models = more overhead. Bedrock's built-ins are purpose-built for relevance."},
+
+  {cat:"RAG", q:"RAG returns 'no relevant information found' after a deploy. No errors, FM invokes fine, OpenSearch healthy, latency normal. Cause?",
+   a:"<strong>Embedding drift</strong> — the updated Lambda uses a <strong>different embedding model version</strong> than the one used to index the documents.",
+   w:"Query vectors and document vectors now live in different vector spaces, so similarity search silently fails. Not temperature (generation, not retrieval), not IAM (model invokes fine), not deleted embeddings (would error)."},
+
+  {cat:"RAG", q:"Rule of thumb: the embedding model used for queries must match what — and why does it matter?",
+   a:"It must match the model used to <strong>index the documents</strong>.",
+   w:"Mismatched embedding models = vector-space mismatch = ineffective retrieval with <strong>no error</strong> and normal latency. Suspect this whenever retrieval quality silently degrades after a change."},
+
+  // ---------- SageMaker Inference ----------
+  {cat:"SageMaker Inference", q:"Match each SageMaker inference option to its use case: Real-Time, Serverless, Asynchronous, Batch Transform.",
+   a:"<strong>Real-Time</strong>: low-latency persistent endpoint, payload ≤ 25 MB. <strong>Serverless</strong>: intermittent traffic, scales to zero, NO GPU. <strong>Asynchronous</strong>: long-running (≤ 15 min), large payloads (≤ 1 GB), GPU, queued. <strong>Batch Transform</strong>: offline batch over a dataset.",
+   w:"Common distractors hinge on three facts: Serverless has <strong>no GPU</strong>, Real-Time caps at <strong>~25 MB</strong>, Asynchronous handles big payloads + long runtimes."},
+
+  {cat:"SageMaker Inference", q:"Deploy image generation: needs GPU, 50 MB payloads, responses ≤ 15 min, on-demand. Which SageMaker option?",
+   a:"<strong>Asynchronous Inference</strong> on a GPU (accelerated) instance + a Lambda for on-demand invocation.",
+   w:"Supports ≤15 min runtimes, payloads up to ~1 GB, GPUs, and usage-based scaling. Real-Time fails the 50 MB need (25 MB cap), Serverless has no GPU, Batch Transform is offline not on-demand."},
+
+  {cat:"SageMaker Inference", q:"Why does the 25 MB vs 50 MB payload detail decide a SageMaker endpoint question?",
+   a:"Real-Time Inference caps payloads at <strong>~25 MB</strong>; Asynchronous Inference handles up to <strong>~1 GB</strong>.",
+   w:"A 50 MB request immediately rules out Real-Time and points to Asynchronous. Memorize the payload ceilings — they're a frequent trap on endpoint-selection questions."},
+
+  // ---------- Model Serving ----------
+  {cat:"Model Serving", q:"DJL-served LLM on 8-GPU instances is underused: real seq length is 10× smaller than configured, low concurrency, model fits in 4 GPUs. Two fixes?",
+   a:"(1) <strong>Reduce max sequence length</strong> → frees memory for a larger rolling batch size (more throughput/concurrency). (2) <strong>Tensor parallelism degree = 4</strong> → packs TWO model replicas per 8-GPU instance.",
+   w:"Avoid degree 8 (one replica across all 8 GPUs = half idle, since the model fits in 4) and avoid just adding instances (doesn't raise concurrency or cut the memory footprint)."},
+
+  {cat:"Model Serving", q:"Tensor parallelism degree 4 vs 8 on an 8-GPU box when the model fits in 4 GPUs?",
+   a:"<strong>Degree 4</strong> → two replicas per instance (2 × 4 GPUs) = full utilization + more concurrency. <strong>Degree 8</strong> → one replica across all 8 GPUs = wasted capacity.",
+   w:"Match the parallel degree to the model's real memory footprint to maximize replicas per instance."},
+
+  // ---------- Bedrock Inference ----------
+  {cat:"Bedrock Inference", q:"Single-Region Bedrock app throttles at peak ('Too many requests'). Boost throughput, same FM, same API, no extra ops, cost-effective?",
+   a:"<strong>Cross-Region inference</strong> — automatically distributes inference across multiple Regions in your geography. Same API, same model, no code/ops changes.",
+   w:"NOT prompt routing (needs 2+ different models). NOT provisioned throughput (for steady high usage, costly for occasional peaks). NOT a custom Lambda failover (ops overhead)."},
+
+  {cat:"Bedrock Inference", q:"Cross-Region inference vs Intelligent Prompt Routing vs Provisioned Throughput — when each?",
+   a:"<strong>Cross-Region</strong>: spread load across Regions to beat throttling, SAME model. <strong>Prompt Routing</strong>: route among 2+ DIFFERENT models of one family for cost/quality. <strong>Provisioned Throughput</strong>: reserve capacity for CONSISTENT high volume.",
+   w:"Peaky traffic on the same model → cross-Region. The 'same FM' constraint alone eliminates prompt routing."},
+
+  // ---------- Inference Params ----------
+  {cat:"Inference Params", q:"Stop the model from generating once a specific phrase appears. Which parameter?",
+   a:"The <strong>stop sequences</strong> parameter — a built-in setting that halts generation when the specified string is produced. Deterministic and reliable.",
+   w:"NOT a prompt instruction like 'stop at this phrase' (model may ignore it). NOT temperature (randomness). NOT top-k (token diversity)."},
+
+  {cat:"Inference Params", q:"Contrast stop sequences vs temperature vs top-k.",
+   a:"<strong>Stop sequences</strong>: WHERE generation ends. <strong>Temperature</strong>: HOW random/creative. <strong>Top-k</strong>: HOW MANY candidate tokens are sampled.",
+   w:"Only stop sequences control the stopping point; the others shape token selection, not termination."},
+
+  // ---------- Guardrails ----------
+  {cat:"Guardrails", q:"You need the MOST detailed analysis of which guardrail rule blocked content and why. Configuration?",
+   a:"Enable <strong>guardrail tracing</strong> ({\"trace\":\"enabled\"}) and monitor <strong>InvocationsIntervened</strong> filtered by <strong>GuardrailPolicyType</strong>: ContentPolicy, TopicPolicy, SensitiveInformationPolicy.",
+   w:"GuardrailPolicyType reveals WHICH policy fired. GuardrailContentSource only distinguishes input vs output — not which policy layer intervened."},
+
+  {cat:"Guardrails", q:"GuardrailPolicyType vs GuardrailContentSource — what does each tell you?",
+   a:"<strong>GuardrailPolicyType</strong> = WHICH policy intervened (Content / Topic / SensitiveInformation). <strong>GuardrailContentSource</strong> = WHERE it happened (INPUT prompt vs OUTPUT response).",
+   w:"For root-causing which rule fired and fine-tuning it, you need GuardrailPolicyType."},
+
+  {cat:"Guardrails", q:"Enforce that EVERY InvokeModel/Converse call applies guardrails, most operationally efficient?",
+   a:"<strong>IAM policies</strong> using the <strong>bedrock:GuardrailIdentifier</strong> condition key, applied to all roles that access Bedrock FMs — central enforcement, no custom code.",
+   w:"Avoid Lambda proxies (bottleneck / failure point) and per-call SSM Parameter lookups (latency / ops). PromptRouterArn is unrelated to guardrails."},
+
+  // ---------- Identity & Auth ----------
+  {cat:"Identity & Auth", q:"Third-party app needs Bedrock access: integrate existing IdP, audit logs, NO long-lived creds, temporary access. Two solutions?",
+   a:"(1) <strong>Amazon Cognito with OIDC</strong> — authenticate via the IdP, exchange tokens for TEMPORARY AWS credentials, audit via CloudTrail. (2) <strong>IAM Identity Center with SAML</strong> federation — IdP integration, temporary creds, CloudTrail audit.",
+   w:"Both eliminate long-lived keys. Reject IAM users (persistent keys), stored IAM creds (long-lived), and an LDAP Lambda authorizer (custom, no temp creds)."},
+
+  {cat:"Identity & Auth", q:"Why do IAM users / stored access keys fail 'eliminate long-lived credentials + integrate IdP'?",
+   a:"IAM users use <strong>persistent access keys</strong>, don't federate with an external IdP, and grant no temporary access — even Secrets Manager rotation doesn't fix it.",
+   w:"Federation — Cognito OIDC, IAM Identity Center SAML, STS temporary credentials — is what delivers short-lived, IdP-integrated access."},
+
+  // ---------- Monitoring & Logging ----------
+  {cat:"Monitoring & Logging", q:"Monitor Knowledge Base data INGESTION to troubleshoot document processing. Solution?",
+   a:"Enable <strong>Knowledge Base logging to CloudWatch Logs</strong>; query with Logs Insights for per-file statuses like RESOURCE_IGNORED, EMBEDDING_FAILED, INDEXING_FAILED.",
+   w:"Built-in and document-level. NOT CloudTrail (API calls only), NOT model invocation logging (inference, not ingestion), NOT Application Signals (app performance)."},
+
+  {cat:"Monitoring & Logging", q:"Three Bedrock 'logging' features people confuse — what does each capture? (model invocation logging / KB logging / guardrail tracing)",
+   a:"<strong>Model invocation logging</strong>: input/output/metadata of inference calls. <strong>KB logging</strong> (CloudWatch): per-file ingestion status. <strong>Guardrail tracing</strong>: which guardrail policy intervened.",
+   w:"CloudTrail is separate: API-call metadata only — not prompt content, not document-processing detail."},
+
+  {cat:"Monitoring & Logging", q:"Comprehensive 7-year audit of all Bedrock invocations INCLUDING prompt content, minimal overhead?",
+   a:"<strong>Bedrock model invocation logging</strong> → S3 destination + <strong>S3 Object Lock (compliance mode)</strong> for immutable 7-year retention; per-business-unit S3 prefixes.",
+   w:"NOT CloudTrail — it logs only API metadata, not the actual prompts/responses needed for regulatory reconstruction."},
+
+  {cat:"Monitoring & Logging", q:"Add source lineage to generated content with the LEAST overhead. Two steps?",
+   a:"(1) <strong>Tag FM outputs with metadata</strong> from the data source (automated traceability). (2) <strong>Register input datasets in AWS Glue Data Catalog</strong> (searchable, managed inventory of sources).",
+   w:"Avoid manual log-to-source correlation (overhead), SageMaker Clarify (explainability/bias, not lineage), and CloudTrail (reviewer actions, not content lineage)."},
+
+  // ---------- Agents ----------
+  {cat:"Agents", q:"Deploy existing Python agent to Bedrock AgentCore Runtime: auto HTTP server, /invocations + /ping, health checks, streaming + sub-second, minimal overhead. Two approaches?",
+   a:"(1) <strong>AgentCore SDK + @app.entrypoint</strong> — auto server on port 8080, required endpoints, content-type handling, JSON + streaming. (2) <strong>AgentCore starter toolkit</strong> — automates packaging, ARM64 build, ECR push, CreateAgentRuntime deploy.",
+   w:"Avoid hand-rolled FastAPI, ECS/Fargate, or SageMaker custom containers — all add infrastructure plumbing."},
+
+  {cat:"Agents", q:"Why pick AgentCore SDK / starter toolkit over FastAPI, ECS Fargate, or SageMaker real-time endpoints?",
+   a:"AgentCore <strong>auto-handles</strong> the HTTP server, endpoint routing, health monitoring, and streaming — zero infra plumbing.",
+   w:"FastAPI = manual endpoints/Dockerfiles. ECS Fargate = build/maintain containers + task definitions. SageMaker custom = build images, configure inference server, autoscaling, health checks."},
+
+  // ---------- Data & PII ----------
+  {cat:"Data & PII", q:"Redact PII from S3 email data, then enable enterprise search for a conversational app. Solution?",
+   a:"<strong>Amazon Comprehend</strong> to detect + redact PII, then <strong>Amazon Kendra</strong> for managed enterprise search over the processed data (integrate with a Bedrock FM).",
+   w:"NOT system-prompt PII removal (unreliable, jailbreakable), NOT Macie (discovery, not redaction), NOT DocumentDB (custom search, no NLP)."},
+
+  {cat:"Data & PII", q:"Comprehend vs Macie vs Textract — which for PII REDACTION before GenAI search?",
+   a:"<strong>Comprehend</strong> — detects AND redacts PII from text, the right pre-indexing cleaner.",
+   w:"Macie discovers/classifies sensitive data for security posture (it flags, doesn't redact for GenAI). Textract extracts text from scanned docs/images — not raw email, not redaction."},
+
+  {cat:"Data & PII", q:"Analyze fashion-show VIDEOS and PHOTOS, store results, build a trend dashboard, least overhead?",
+   a:"<strong>Bedrock multimodal FMs</strong> (e.g. Amazon Nova Pro, Claude Sonnet) analyze the media directly, <strong>Step Functions</strong> orchestrate, store in S3, visualize in a <strong>QuickSight</strong> dashboard.",
+   w:"No custom model training. NOT Rekognition Custom Labels (train/maintain a model), NOT QuickSight Q (answers questions on existing dashboard data — it can't analyze media)."},
+
+  // ---------- Dev & Governance ----------
+  {cat:"Dev & Governance", q:"Governed prompt templates with approval workflows + 7-yr invocation logging, minimal overhead. Two steps?",
+   a:"(1) <strong>Bedrock Prompt Management</strong> — create, parameterize, version, and APPROVE templates via multi-stage workflows with access roles. (2) <strong>Model invocation logging → S3</strong> with Object Lock compliance mode (7-yr immutable), per-BU prefixes.",
+   w:"Avoid DynamoDB-based custom approval workflows and EventBridge/CloudTrail custom pipelines — more code and more failure points."},
+
+  {cat:"Dev & Governance", q:"Maximize developer productivity with Amazon Q Developer (enforce patterns, auto-tune perf, accelerate testing). Two steps?",
+   a:"(1) Configure Q Developer to <strong>auto-generate + refactor</strong> integration code, give targeted API guidance, and suggest performance optimizations across the codebase. (2) Integrate its <strong>automated test generation into CI/CD</strong>.",
+   w:"Avoid mandatory manual approval of all changes or retrospective-only analysis — both kill the real-time velocity benefit."},
+
+  {cat:"Dev & Governance", q:"Real-time article style analysis: click 'analyze' → streamed suggestions immediately, route by metadata category, least overhead. Architecture?",
+   a:"<strong>API Gateway WebSocket API</strong> → Lambda that reads the category metadata to route to the right Bedrock model, uses <strong>Prompt Management</strong> for style rules, and streams via the <strong>Bedrock streaming API</strong>.",
+   w:"WebSockets give serverless real-time bidirectional streaming. NOT SQS (polling latency), NOT REST + function URLs (not for long-lived streams), NOT ECS (infra management)."},
+
+  {cat:"Dev & Governance", q:"Order the 5 steps to validate a new Bedrock FM before replacing production.",
+   a:"1) Define <strong>metrics</strong> (relevance, factual accuracy, fluency). 2) Build a <strong>test dataset</strong> (diverse scenarios + edge cases). 3) <strong>A/B test</strong> vs the current model. 4) Automated <strong>quality gates</strong> with Step Functions. 5) <strong>Analyze + report</strong>.",
+   w:"Logic: decide how you'll measure → get data → compare → gate the rollout → document. <strong>Metrics → data → compare → gate → report.</strong>"},
+
+  {cat:"Dev & Governance", q:"Near real-time, event-driven, resilient KB ingestion (new S3 docs in ASAP, deletes out ASAP). Architecture?",
+   a:"<strong>S3 Event Notifications</strong> (object-created / object-deleted) → <strong>SQS</strong> queue → Lambda calling IngestKnowledgeBaseDocuments / DeleteKnowledgeBaseDocuments.",
+   w:"SQS buffers spikes, retries automatically, and misses nothing. NOT EventBridge Scheduler every 5 min (time-based, not real-time), NOT S3→Lambda directly (no buffering/retry, fails under load)."}
+];
+
+// ---------- state ----------
+let order = CARDS.map((_,i)=>i);
+let pos = 0;
+let activeCat = "All";
+const mastered = new Set();
+
+const el = id => document.getElementById(id);
+const card = el("card");
+
+// build filter chips
+const cats = ["All", ...Array.from(new Set(CARDS.map(c=>c.cat)))];
+const filtersEl = el("filters");
+cats.forEach(cat=>{
+  const count = cat==="All" ? CARDS.length : CARDS.filter(c=>c.cat===cat).length;
+  const b = document.createElement("button");
+  b.className = "chip" + (cat==="All"?" active":"");
+  b.dataset.cat = cat;
+  b.innerHTML = cat + '<span class="c">'+count+'</span>';
+  b.onclick = ()=>setCat(cat);
+  filtersEl.appendChild(b);
+});
+
+function currentList(){
+  return order.filter(i => activeCat==="All" || CARDS[i].cat===activeCat);
+}
+
+function setCat(cat){
+  activeCat = cat;
+  pos = 0;
+  document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("active", c.dataset.cat===cat));
+  card.classList.remove("flipped");
+  render();
+}
+
+function pad(n){return String(n).padStart(2,"0");}
+
+function render(){
+  const list = currentList();
+  el("cTot").textContent = list.length;
+  el("statTotal").textContent = list.length;
+  el("statKnown").textContent = [...mastered].filter(i => activeCat==="All" || CARDS[i].cat===activeCat).length;
+
+  if(list.length===0) return;
+  if(pos>=list.length) pos = 0;
+  const idx = list[pos];
+  const c = CARDS[idx];
+
+  el("fCat").textContent = c.cat;
+  el("bCat").textContent = c.cat;
+  el("fQ").innerHTML = c.q;
+  el("bA").innerHTML = c.a;
+  el("bW").innerHTML = c.w;
+
+  el("cNow").textContent = pos+1;
+  el("fIndex").textContent = pad(pos+1)+" / "+pad(list.length);
+  el("bIndex").textContent = pad(pos+1)+" / "+pad(list.length);
+
+  const isKnown = mastered.has(idx);
+  el("know").classList.toggle("on", isKnown);
+  el("know").querySelector("svg").style.opacity = isKnown ? 1 : .55;
+
+  el("bar").style.width = ((pos+1)/list.length*100)+"%";
+}
+
+function flip(){ card.classList.toggle("flipped"); }
+
+function go(dir){
+  const list = currentList();
+  if(!list.length) return;
+  card.classList.remove("flipped");
+  pos = (pos + dir + list.length) % list.length;
+  render();
+}
+
+function toggleKnown(){
+  const list = currentList();
+  if(!list.length) return;
+  const idx = list[pos];
+  if(mastered.has(idx)) mastered.delete(idx); else mastered.add(idx);
+  render();
+}
+
+function shuffle(){
+  for(let i=order.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [order[i],order[j]]=[order[j],order[i]];
+  }
+  pos = 0;
+  card.classList.remove("flipped");
+  render();
+}
+
+// events
+card.onclick = flip;
+el("flip").onclick = (e)=>{e.stopPropagation();flip();};
+el("next").onclick = ()=>go(1);
+el("prev").onclick = ()=>go(-1);
+el("know").onclick = toggleKnown;
+el("shuffle").onclick = shuffle;
+
+document.addEventListener("keydown", e=>{
+  if(e.key===" "||e.key==="Enter"){e.preventDefault();flip();}
+  else if(e.key==="ArrowRight"){go(1);}
+  else if(e.key==="ArrowLeft"){go(-1);}
+  else if(e.key.toLowerCase()==="m"){toggleKnown();}
+  else if(e.key.toLowerCase()==="s"){shuffle();}
+});
+
+render();
+</script>
+</body>
+</html>

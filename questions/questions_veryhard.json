@@ -1,0 +1,3858 @@
+{
+ "_comment": "AWS AIP-C01 VERY HARD question bank. The hardest tier: every item has closely competing options (no single obvious answer). The scenario's decisive constraint, a hard service limit, or an input-vs-output / same-vs-different distinction selects the best answer; explanations say why each tempting option loses. To add questions append objects to 'questions'. Each: {id, task (key in 'tasks'), type ('single'=one correct, 'multi'=all-or-nothing), question, options:[{text, correct(bool), explanation}]}. 'multi' needs >=2 correct:true. Optional 'source'.",
+ "exam": "AWS Certified Generative AI Developer – Professional (AIP-C01)",
+ "difficulty": "veryhard",
+ "passPct": 75,
+ "tasks": {
+  "1.1": {
+   "name": "Well-Architected & GenAI Lens",
+   "domain": 1,
+   "resources": [
+    {
+     "label": "AWS Well-Architected Generative AI Lens",
+     "url": "https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html"
+    }
+   ]
+  },
+  "1.2": {
+   "name": "Foundation Models — Selection, Inference & Optimization",
+   "domain": 1,
+   "resources": [
+    {
+     "label": "Supported foundation models in Amazon Bedrock",
+     "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html"
+    },
+    {
+     "label": "Cross-Region inference",
+     "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html"
+    }
+   ]
+  },
+  "1.3": {
+   "name": "Data Preparation, Governance & Lineage",
+   "domain": 1,
+   "resources": [
+    {
+     "label": "Detect PII with Amazon Comprehend",
+     "url": "https://docs.aws.amazon.com/comprehend/latest/dg/pii.html"
+    },
+    {
+     "label": "AWS Glue Data Catalog",
+     "url": "https://docs.aws.amazon.com/glue/latest/dg/catalog-and-crawler.html"
+    }
+   ]
+  },
+  "1.4": {
+   "name": "RAG, Knowledge Bases & Vector Stores",
+   "domain": 1,
+   "resources": [
+    {
+     "label": "Amazon Bedrock Knowledge Bases (RAG)",
+     "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html"
+    }
+   ]
+  },
+  "1.5": {
+   "name": "Chunking, Embeddings & Retrieval Quality",
+   "domain": 1,
+   "resources": [
+    {
+     "label": "How content chunking works",
+     "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/kb-chunking.html"
+    },
+    {
+     "label": "Amazon Bedrock inference parameters",
+     "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/inference-parameters.html"
+    }
+   ]
+  },
+  "1.6": {
+   "name": "Prompt Management & Inference Control",
+   "domain": 1,
+   "resources": [
+    {
+     "label": "Prompt management in Amazon Bedrock",
+     "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html"
+    },
+    {
+     "label": "Inference parameters",
+     "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/inference-parameters.html"
+    }
+   ]
+  },
+  "2.1": {
+   "name": "Agents — Bedrock Agents, AgentCore & Tooling",
+   "domain": 2,
+   "resources": [
+    {
+     "label": "Amazon Bedrock Agents",
+     "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html"
+    }
+   ]
+  },
+  "2.2": {
+   "name": "Model Deployment & Inference Endpoints",
+   "domain": 2,
+   "resources": [
+    {
+     "label": "Deploy models for inference (Amazon SageMaker AI)",
+     "url": "https://docs.aws.amazon.com/sagemaker/latest/dg/deploy-model.html"
+    }
+   ]
+  },
+  "2.3": {
+   "name": "Dev Tools & Automation (Amazon Q Developer, CI/CD)",
+   "domain": 2,
+   "resources": [
+    {
+     "label": "What is Amazon Q Developer",
+     "url": "https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/what-is.html"
+    }
+   ]
+  },
+  "2.4": {
+   "name": "Observability, Monitoring & Logging",
+   "domain": 2,
+   "resources": [
+    {
+     "label": "Amazon Bedrock model invocation logging",
+     "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html"
+    }
+   ]
+  },
+  "3.1": {
+   "name": "Security, Identity & Access",
+   "domain": 3,
+   "resources": [
+    {
+     "label": "Amazon Cognito identity pools",
+     "url": "https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html"
+    },
+    {
+     "label": "AWS IAM Identity Center",
+     "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html"
+    }
+   ]
+  },
+  "3.2": {
+   "name": "Guardrails, Safety & Responsible AI",
+   "domain": 3,
+   "resources": [
+    {
+     "label": "Amazon Bedrock Guardrails",
+     "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html"
+    }
+   ]
+  },
+  "3.3": {
+   "name": "Compliance, Audit & Data Protection",
+   "domain": 3,
+   "resources": [
+    {
+     "label": "Amazon S3 Object Lock",
+     "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html"
+    }
+   ]
+  }
+ },
+ "questions": [
+  {
+   "id": "1.1-v1",
+   "task": "1.1",
+   "type": "single",
+   "question": "A production Bedrock workload has steady, high, predictable demand for 12 business hours and near-zero traffic overnight. The team must guarantee dedicated capacity during business hours (no throttling) at the lowest total cost, keeping the same model and API. Which approach is BEST?",
+   "options": [
+    {
+     "text": "Use Provisioned Throughput without a long-term commitment, creating model units for business hours and deleting them overnight.",
+     "correct": true,
+     "explanation": "No-commitment Provisioned Throughput guarantees dedicated capacity while active and is billed only while provisioned, so releasing units overnight avoids paying for the idle period."
+    },
+    {
+     "text": "Use Provisioned Throughput with a 6-month commitment sized for peak.",
+     "correct": false,
+     "explanation": "A committed term is cheapest per hour but you pay for the reserved units overnight too, so with near-zero overnight traffic it is not the lowest total cost."
+    },
+    {
+     "text": "Use on-demand inference for all traffic.",
+     "correct": false,
+     "explanation": "On-demand has no idle cost but cannot guarantee dedicated capacity during peak hours, so it fails the no-throttling requirement."
+    },
+    {
+     "text": "Use cross-Region inference to add capacity during business hours.",
+     "correct": false,
+     "explanation": "Cross-Region inference spreads on-demand traffic for throughput/availability but does not reserve guaranteed capacity, and it is still on-demand priced."
+    }
+   ]
+  },
+  {
+   "id": "1.1-v2",
+   "task": "1.1",
+   "type": "multi",
+   "question": "A synchronous, customer-facing Bedrock feature must become more resilient to transient errors and to a single-Region impairment, per the Reliability pillar. Which TWO measures are MOST effective? (Select TWO.)",
+   "options": [
+    {
+     "text": "Implement retries with exponential backoff and jitter for throttling and transient 5xx errors.",
+     "correct": true,
+     "explanation": "Backoff with jitter recovers from transient throttling/5xx without synchronized retry storms, directly improving reliability."
+    },
+    {
+     "text": "Use cross-Region inference (or multi-Region failover) so requests can be served if one Region is impaired.",
+     "correct": true,
+     "explanation": "Spreading or failing over across Regions keeps the feature available during a regional impairment."
+    },
+    {
+     "text": "Place a single-Region Amazon SQS queue in front of the model call.",
+     "correct": false,
+     "explanation": "A queue in one Region is itself a regional single point of failure and adds latency to a synchronous, user-facing path, so it does not address regional resilience here."
+    },
+    {
+     "text": "Increase maxTokens so fewer requests are needed.",
+     "correct": false,
+     "explanation": "Output length has no effect on resilience to errors or regional failure."
+    },
+    {
+     "text": "Lower the temperature for more consistent outputs.",
+     "correct": false,
+     "explanation": "Temperature controls randomness, not reliability."
+    }
+   ]
+  },
+  {
+   "id": "1.1-v3",
+   "task": "1.1",
+   "type": "single",
+   "question": "An interactive assistant must reduce the latency users perceive on long answers, WITHOUT changing which model is used and without a training step. Which choice is BEST?",
+   "options": [
+    {
+     "text": "Enable response streaming and turn on latency-optimized inference for the model.",
+     "correct": true,
+     "explanation": "Streaming shows tokens as they are generated (cutting perceived latency) and latency-optimized inference speeds generation, both without changing the model or training anything."
+    },
+    {
+     "text": "Distill to a smaller student model.",
+     "correct": false,
+     "explanation": "Distillation reduces latency but changes the model and requires a training step, which the scenario forbids."
+    },
+    {
+     "text": "Buy Provisioned Throughput at high model units.",
+     "correct": false,
+     "explanation": "Provisioned Throughput reduces throttling/queueing but does not lower the per-token generation time that dominates perceived latency on long answers."
+    },
+    {
+     "text": "Switch to a model with a larger context window.",
+     "correct": false,
+     "explanation": "A bigger context window does not reduce generation latency and can increase it."
+    }
+   ]
+  },
+  {
+   "id": "1.1-v4",
+   "task": "1.1",
+   "type": "single",
+   "question": "A team must roll out a new prompt version to production with the ability to revert instantly if quality regresses, measure both versions, and avoid redeploying application code. Which approach best fits Operational Excellence?",
+   "options": [
+    {
+     "text": "Manage the prompt in Amazon Bedrock Prompt Management with versions/variants, run automated evaluations, and switch or revert by changing the active version.",
+     "correct": true,
+     "explanation": "Managed prompt versions/variants plus automated evaluation let you compare, switch, and roll back without any code deploy."
+    },
+    {
+     "text": "Hard-code the new prompt behind an application feature flag.",
+     "correct": false,
+     "explanation": "A feature flag enables reverting but still requires a code deploy to ship the prompt and provides no managed versioning or evaluation."
+    },
+    {
+     "text": "Deploy two Lambda functions, each hard-coding one prompt, and split traffic.",
+     "correct": false,
+     "explanation": "This is custom, requires code deploys, and lacks managed prompt versioning and built-in evaluation."
+    },
+    {
+     "text": "Raise the temperature so the new prompt is more robust.",
+     "correct": false,
+     "explanation": "Temperature does not provide rollout control, measurement, or rollback."
+    }
+   ]
+  },
+  {
+   "id": "1.1-v5",
+   "task": "1.1",
+   "type": "single",
+   "question": "A workload classifies tens of millions of documents per day in rolling waves; results must be available within about two hours of each submission (not real time). Cost must be minimized. Which option is MOST cost-effective?",
+   "options": [
+    {
+     "text": "Amazon Bedrock batch inference jobs.",
+     "correct": true,
+     "explanation": "The work is high-volume and latency-tolerant (about two hours), which is exactly what Bedrock batch inference is priced and designed for."
+    },
+    {
+     "text": "On-demand real-time invocation for each document.",
+     "correct": false,
+     "explanation": "Per-document real-time calls work but are the most expensive option at this volume and are unnecessary given the two-hour tolerance."
+    },
+    {
+     "text": "Provisioned Throughput sized for the wave peaks.",
+     "correct": false,
+     "explanation": "Reserved capacity guarantees throughput but costs more than batch for latency-tolerant bulk work."
+    },
+    {
+     "text": "Amazon SageMaker Asynchronous Inference.",
+     "correct": false,
+     "explanation": "Asynchronous inference serves SageMaker-hosted models, not Bedrock foundation models, so it does not apply."
+    }
+   ]
+  },
+  {
+   "id": "1.1-v6",
+   "task": "1.1",
+   "type": "single",
+   "question": "A team building a Bedrock RAG application wants AWS prescriptive best practices created specifically for generative AI concerns such as RAG accuracy, responsible AI, and model selection. Which resource is the BEST fit?",
+   "options": [
+    {
+     "text": "The AWS Well-Architected Generative AI Lens.",
+     "correct": true,
+     "explanation": "The Generative AI Lens provides design principles and best practices tailored to generative AI workloads, including RAG and responsible AI."
+    },
+    {
+     "text": "The AWS Well-Architected Machine Learning Lens.",
+     "correct": false,
+     "explanation": "The ML Lens covers the traditional ML lifecycle and is not focused on generative-AI-specific concerns like RAG accuracy and responsible AI for FMs."
+    },
+    {
+     "text": "The six core Well-Architected pillars alone.",
+     "correct": false,
+     "explanation": "The core pillars are general guidance; the GenAI-specific practices live in the Generative AI Lens."
+    },
+    {
+     "text": "The AWS Well-Architected SaaS Lens.",
+     "correct": false,
+     "explanation": "The SaaS Lens targets SaaS business/architecture concerns, not generative AI design."
+    }
+   ]
+  },
+  {
+   "id": "1.1-v7",
+   "task": "1.1",
+   "type": "single",
+   "question": "A RAG chatbot includes a 6,000-token static policy preamble in every request. The team wants to cut the cost and latency of that repeated context with minimal change and using the SAME model. Which option is BEST?",
+   "options": [
+    {
+     "text": "Enable prompt caching for the static preamble so the repeated prefix is reused across requests.",
+     "correct": true,
+     "explanation": "Prompt caching reuses the unchanging prefix, reducing both billed tokens and latency for the repeated context with no model change."
+    },
+    {
+     "text": "Fine-tune the model so the policy is implicit and can be dropped from prompts.",
+     "correct": false,
+     "explanation": "Fine-tuning changes the model, adds maintenance, and is not a minimal change; it also makes policy updates harder."
+    },
+    {
+     "text": "Store the preamble in a knowledge base and retrieve it each call.",
+     "correct": false,
+     "explanation": "Retrieval still injects the preamble tokens every call and adds a retrieval step, so it does not cut the repeated-token cost."
+    },
+    {
+     "text": "Reduce maxTokens on the response.",
+     "correct": false,
+     "explanation": "Lowering output length does not reduce the cost of the repeated input preamble."
+    }
+   ]
+  },
+  {
+   "id": "1.1-v8",
+   "task": "1.1",
+   "type": "single",
+   "question": "A customer-facing RAG assistant occasionally produces confident but unsupported answers. The team wants to reduce hallucinations while keeping a good user experience, aligned with the GenAI Lens responsible-AI guidance. Which combination is BEST?",
+   "options": [
+    {
+     "text": "Add a Guardrails contextual grounding check and instruct the model to answer only from the retrieved context and to say it does not know when the answer is absent.",
+     "correct": true,
+     "explanation": "Combining a grounding check with an explicit grounding/abstention instruction is defense-in-depth that targets ungrounded answers directly."
+    },
+    {
+     "text": "Set temperature to 0.",
+     "correct": false,
+     "explanation": "Lower randomness alone does not make an answer grounded in the sources; the model can still confidently fabricate."
+    },
+    {
+     "text": "Switch to a larger model.",
+     "correct": false,
+     "explanation": "A larger model still hallucinates without grounding controls; size is not a grounding mechanism."
+    },
+    {
+     "text": "Add a denied-topics policy for the subject area.",
+     "correct": false,
+     "explanation": "Denied topics block whole subjects; they do not detect or prevent ungrounded answers within an allowed subject."
+    }
+   ]
+  },
+  {
+   "id": "1.2-v1",
+   "task": "1.2",
+   "type": "single",
+   "question": "A bank's assistant must always cite the LATEST internal regulations (which change weekly) AND must CONSISTENTLY emit a strict report template. Which approach meets BOTH with the least ongoing effort?",
+   "options": [
+    {
+     "text": "Use RAG for the frequently changing regulations and fine-tune the model for the fixed report template/style.",
+     "correct": true,
+     "explanation": "RAG keeps regulatory content current without retraining, while fine-tuning reliably enforces a rigid output format; each technique handles the part it is best at."
+    },
+    {
+     "text": "Fine-tune the model every week on both the regulations and the template.",
+     "correct": false,
+     "explanation": "Weekly fine-tuning is operationally heavy and still lags between runs; RAG handles freshness far more cheaply."
+    },
+    {
+     "text": "Use continued pre-training on the regulations and a prompt for the template.",
+     "correct": false,
+     "explanation": "Continued pre-training is for absorbing domain language from large corpora, is heavy, and does not keep weekly content current."
+    },
+    {
+     "text": "Use RAG only, relying on a detailed prompt to enforce the template.",
+     "correct": false,
+     "explanation": "RAG fixes freshness, but prompt-only formatting is not reliably consistent, which the scenario explicitly requires."
+    }
+   ]
+  },
+  {
+   "id": "1.2-v2",
+   "task": "1.2",
+   "type": "single",
+   "question": "A team has a very large corpus of UNLABELED specialized legal text and wants the base model to internalize the domain's vocabulary and patterns. Which customization method is appropriate?",
+   "options": [
+    {
+     "text": "Continued pre-training on the unlabeled corpus.",
+     "correct": true,
+     "explanation": "Continued pre-training adapts a model to domain language using large volumes of unlabeled text."
+    },
+    {
+     "text": "Supervised fine-tuning.",
+     "correct": false,
+     "explanation": "Fine-tuning requires labeled prompt/response pairs; the corpus is unlabeled, so it does not apply."
+    },
+    {
+     "text": "Retrieval-Augmented Generation.",
+     "correct": false,
+     "explanation": "RAG retrieves text at inference time but does not make the model internalize domain language."
+    },
+    {
+     "text": "Model distillation.",
+     "correct": false,
+     "explanation": "Distillation compresses a larger model into a smaller one; it is not a method for absorbing a domain corpus."
+    }
+   ]
+  },
+  {
+   "id": "1.2-v3",
+   "task": "1.2",
+   "type": "single",
+   "question": "Latency and cost of a large model are too high, but the team must KEEP its accuracy on their specific task and can accept an upfront training step. Which option BEST fits?",
+   "options": [
+    {
+     "text": "Model distillation, training a smaller student from the large teacher on the task.",
+     "correct": true,
+     "explanation": "Distillation produces a smaller, cheaper, faster model that retains much of the teacher's task accuracy, and it explicitly involves an upfront training step."
+    },
+    {
+     "text": "Enable latency-optimized inference on the large model.",
+     "correct": false,
+     "explanation": "Latency-optimized inference speeds responses but does not meaningfully cut the large model's cost and involves no training step."
+    },
+    {
+     "text": "Purchase Provisioned Throughput for the large model.",
+     "correct": false,
+     "explanation": "Provisioned Throughput stabilizes capacity but does not reduce the per-call cost or size of the large model."
+    },
+    {
+     "text": "Lower top-k to make the large model cheaper.",
+     "correct": false,
+     "explanation": "Sampling parameters do not change model cost or latency materially."
+    }
+   ]
+  },
+  {
+   "id": "1.2-v4",
+   "task": "1.2",
+   "type": "single",
+   "question": "Throughput must increase for a steady, predictable, high baseline load running 24/7, at the lowest per-token cost, using the same model and API. Which option is BEST?",
+   "options": [
+    {
+     "text": "Provisioned Throughput with a committed term.",
+     "correct": true,
+     "explanation": "For steady 24/7 high volume, a committed Provisioned Throughput model unit gives the lowest per-token cost and guaranteed capacity."
+    },
+    {
+     "text": "Cross-Region inference.",
+     "correct": false,
+     "explanation": "Cross-Region inference adds throughput but is on-demand priced, so it is not the lowest per-token cost for steady 24/7 load."
+    },
+    {
+     "text": "Bedrock batch inference.",
+     "correct": false,
+     "explanation": "Batch inference is offline and cannot serve steady real-time throughput."
+    },
+    {
+     "text": "On-demand inference with client retries.",
+     "correct": false,
+     "explanation": "On-demand at constant high volume costs more and risks throttling versus committed reserved capacity."
+    }
+   ]
+  },
+  {
+   "id": "1.2-v5",
+   "task": "1.2",
+   "type": "multi",
+   "question": "To make a model's outputs maximally deterministic for snapshot tests, which TWO inference settings TOGETHER are most effective? (Select TWO.)",
+   "options": [
+    {
+     "text": "Set temperature to 0.",
+     "correct": true,
+     "explanation": "A temperature of 0 makes sampling effectively greedy, the primary lever for deterministic output."
+    },
+    {
+     "text": "Constrain sampling with a low top-p (and avoid a large top-k).",
+     "correct": true,
+     "explanation": "Narrowing the nucleus to the most probable tokens removes residual variability that temperature alone may leave."
+    },
+    {
+     "text": "Use a high temperature with a low maxTokens.",
+     "correct": false,
+     "explanation": "High temperature maximizes randomness; capping length does not make content deterministic."
+    },
+    {
+     "text": "Add several stop sequences.",
+     "correct": false,
+     "explanation": "Stop sequences control where generation ends, not how deterministic the tokens are."
+    },
+    {
+     "text": "Increase top-k substantially.",
+     "correct": false,
+     "explanation": "A larger top-k widens the candidate pool and increases variability."
+    }
+   ]
+  },
+  {
+   "id": "1.2-v6",
+   "task": "1.2",
+   "type": "single",
+   "question": "A pipeline expects the model to stop generating exactly when it produces the marker END_JSON, and that marker must not appear in the output to keep downstream parsing clean. Which solution is BEST?",
+   "options": [
+    {
+     "text": "Configure END_JSON as a stop sequence in the inference request.",
+     "correct": true,
+     "explanation": "A stop sequence halts generation when the phrase is produced and the stop text itself is not included in the returned output, which keeps parsing clean."
+    },
+    {
+     "text": "Set maxTokens to an estimated length.",
+     "correct": false,
+     "explanation": "A length guess does not stop at the marker and risks cutting content or leaving the marker in."
+    },
+    {
+     "text": "Lower the temperature.",
+     "correct": false,
+     "explanation": "Temperature does not control stopping at a specific phrase."
+    },
+    {
+     "text": "Instruct the model in the prompt to stop after END_JSON.",
+     "correct": false,
+     "explanation": "Prompt instructions are not a reliable stopping mechanism and would leave the marker in the text."
+    }
+   ]
+  },
+  {
+   "id": "1.2-v7",
+   "task": "1.2",
+   "type": "single",
+   "question": "A high-volume pipeline must caption product IMAGES with short text at the lowest cost and latency while still supporting vision. Which Amazon Nova model is BEST?",
+   "options": [
+    {
+     "text": "Amazon Nova Lite.",
+     "correct": true,
+     "explanation": "Nova Lite is the low-cost multimodal model, the cheapest/fastest Nova option that still understands images."
+    },
+    {
+     "text": "Amazon Nova Micro.",
+     "correct": false,
+     "explanation": "Nova Micro is the lowest-cost model overall but is text-only and cannot process images."
+    },
+    {
+     "text": "Amazon Nova Pro.",
+     "correct": false,
+     "explanation": "Nova Pro understands images but at higher cost and latency than this simple, high-volume captioning needs."
+    },
+    {
+     "text": "Amazon Nova Canvas.",
+     "correct": false,
+     "explanation": "Nova Canvas generates images; it does not caption or understand existing images."
+    }
+   ]
+  },
+  {
+   "id": "1.2-v8",
+   "task": "1.2",
+   "type": "single",
+   "question": "A team must cut vector-storage cost for a TEXT-ONLY semantic search while keeping good recall, with minimal re-architecture. Which choice is BEST?",
+   "options": [
+    {
+     "text": "Use Amazon Titan Text Embeddings V2 and select a smaller output dimension.",
+     "correct": true,
+     "explanation": "Titan Text Embeddings V2 supports configurable, smaller dimensions that cut index size and cost while keeping acceptable recall, with no architecture change."
+    },
+    {
+     "text": "Switch to Amazon Titan Multimodal Embeddings.",
+     "correct": false,
+     "explanation": "Multimodal embeddings target image+text retrieval and do not reduce storage for a text-only search."
+    },
+    {
+     "text": "Increase the embedding dimension to improve accuracy.",
+     "correct": false,
+     "explanation": "Larger dimensions increase storage and cost, the opposite of the goal."
+    },
+    {
+     "text": "Use a text-generation model to produce the embeddings.",
+     "correct": false,
+     "explanation": "Generative models are not embedding models and would not provide a proper vector index."
+    }
+   ]
+  },
+  {
+   "id": "1.2-v9",
+   "task": "1.2",
+   "type": "single",
+   "question": "A team must compare two models on SUMMARY quality (coherence and relevance) over thousands of documents, automatically, with NO human raters and NO reference summaries available. Which evaluation approach fits?",
+   "options": [
+    {
+     "text": "Amazon Bedrock model evaluation with an LLM-as-a-judge evaluator.",
+     "correct": true,
+     "explanation": "LLM-as-a-judge scores open-ended quality dimensions at scale without humans and without needing reference answers."
+    },
+    {
+     "text": "Bedrock evaluation using reference-based metrics such as BERTScore or exact match.",
+     "correct": false,
+     "explanation": "Reference-based metrics require ground-truth reference summaries, which are not available here."
+    },
+    {
+     "text": "A human evaluation workflow.",
+     "correct": false,
+     "explanation": "Human evaluation is excluded by the no-human-raters constraint."
+    },
+    {
+     "text": "Compare the two models' CloudWatch latency metrics.",
+     "correct": false,
+     "explanation": "Latency does not measure summary coherence or relevance."
+    }
+   ]
+  },
+  {
+   "id": "1.2-v10",
+   "task": "1.2",
+   "type": "single",
+   "question": "A team must build ONE codebase that does multi-turn chat WITH tool calling across both Anthropic Claude and Amazon Nova models, minimizing model-specific request/response code. Which approach is BEST?",
+   "options": [
+    {
+     "text": "Use the Amazon Bedrock Converse API.",
+     "correct": true,
+     "explanation": "Converse provides a unified, model-agnostic interface for multi-turn messages and tool use across supported models, minimizing per-model code."
+    },
+    {
+     "text": "Call InvokeModel with each model's native JSON body.",
+     "correct": false,
+     "explanation": "InvokeModel requires model-specific payloads and parsing, which is exactly the per-model code to avoid."
+    },
+    {
+     "text": "Use InvokeModelWithResponseStream per model.",
+     "correct": false,
+     "explanation": "This still needs model-specific bodies and only adds streaming, not unification."
+    },
+    {
+     "text": "Build a custom abstraction layer over each model's API.",
+     "correct": false,
+     "explanation": "A custom layer reinvents what Converse already standardizes."
+    }
+   ]
+  },
+  {
+   "id": "1.2-v11",
+   "task": "1.2",
+   "type": "single",
+   "question": "A company fine-tuned open-weights Llama models OUTSIDE AWS (a supported architecture) and wants them callable through the Amazon Bedrock runtime API, on demand, with no servers to run. Which option is correct?",
+   "options": [
+    {
+     "text": "Amazon Bedrock Custom Model Import.",
+     "correct": true,
+     "explanation": "Custom Model Import brings supported external weights into Bedrock so they are invoked through the standard on-demand Bedrock APIs with no managed infrastructure."
+    },
+    {
+     "text": "Deploy the weights to a SageMaker real-time endpoint.",
+     "correct": false,
+     "explanation": "A SageMaker endpoint can serve the model but is not the Bedrock runtime API and requires managing the endpoint."
+    },
+    {
+     "text": "Buy Provisioned Throughput on a Bedrock base model.",
+     "correct": false,
+     "explanation": "Provisioned Throughput reserves capacity for Bedrock models; it does not serve your own imported weights."
+    },
+    {
+     "text": "Run continued pre-training in Bedrock.",
+     "correct": false,
+     "explanation": "Continued pre-training customizes a Bedrock base model; it does not import your externally trained weights."
+    }
+   ]
+  },
+  {
+   "id": "1.2-v12",
+   "task": "1.2",
+   "type": "single",
+   "question": "A team wants to grow throughput using cross-Region inference, but compliance requires that all inference data remain within one approved Region. What is the CORRECT stance?",
+   "options": [
+    {
+     "text": "Do not use a cross-Region profile that can route outside the approved Region; stay on in-Region on-demand or Provisioned Throughput.",
+     "correct": true,
+     "explanation": "Cross-Region inference can route requests to other Regions in the geography, which would violate single-Region data residency, so it must be avoided for this requirement."
+    },
+    {
+     "text": "Enable cross-Region inference; the data never leaves the source Region.",
+     "correct": false,
+     "explanation": "Cross-Region inference can process requests in other Regions, so this statement is incorrect."
+    },
+    {
+     "text": "Enable cross-Region inference; it always keeps data within the source Region's country.",
+     "correct": false,
+     "explanation": "Routing targets depend on the profile's geography and are not guaranteed to stay in one country/Region."
+    },
+    {
+     "text": "Switch to batch inference to keep data in Region.",
+     "correct": false,
+     "explanation": "Batch versus real-time is unrelated to the residency guarantee and does not address the throughput requirement correctly."
+    }
+   ]
+  },
+  {
+   "id": "1.2-v13",
+   "task": "1.2",
+   "type": "single",
+   "question": "Users upload SCREENSHOTS OF CHARTS and ask analytical questions about the trends shown. Which approach BEST answers them?",
+   "options": [
+    {
+     "text": "Send the image to a Bedrock multimodal foundation model via the Converse API.",
+     "correct": true,
+     "explanation": "A multimodal FM can interpret the chart's visuals and answer natural-language analytical questions about the trends."
+    },
+    {
+     "text": "Use Amazon Textract to extract the chart.",
+     "correct": false,
+     "explanation": "Textract extracts text and tables from documents but does not reason about a chart's visual trends."
+    },
+    {
+     "text": "Use Amazon Rekognition to analyze the image.",
+     "correct": false,
+     "explanation": "Rekognition returns labels/objects, not analytical answers about chart trends."
+    },
+    {
+     "text": "Use Amazon Titan Multimodal Embeddings.",
+     "correct": false,
+     "explanation": "Multimodal embeddings support retrieval/similarity, not question answering about an image."
+    }
+   ]
+  },
+  {
+   "id": "1.2-v14",
+   "task": "1.2",
+   "type": "single",
+   "question": "A Bedrock foundation model must process a very large OFFLINE job over millions of prompts at the lowest cost; turnaround of tens of minutes is fine. Which option is BEST?",
+   "options": [
+    {
+     "text": "Amazon Bedrock batch inference (a model invocation job).",
+     "correct": true,
+     "explanation": "Batch inference is purpose-built for large, latency-tolerant offline workloads on Bedrock FMs at the lowest cost."
+    },
+    {
+     "text": "Amazon SageMaker Asynchronous Inference.",
+     "correct": false,
+     "explanation": "Asynchronous inference serves SageMaker-hosted models, not Bedrock foundation models, so it does not apply."
+    },
+    {
+     "text": "A loop of on-demand InvokeModel calls.",
+     "correct": false,
+     "explanation": "Real-time calls in a loop are more expensive and slower for millions of prompts than a batch job."
+    },
+    {
+     "text": "Provisioned Throughput.",
+     "correct": false,
+     "explanation": "Reserved online capacity is not the cheapest way to run a one-off offline bulk job."
+    }
+   ]
+  },
+  {
+   "id": "1.2-v15",
+   "task": "1.2",
+   "type": "single",
+   "question": "A team has only about 30 examples of a desired behavior and needs better adherence quickly; collecting thousands of labeled examples is not feasible. Which approach is BEST?",
+   "options": [
+    {
+     "text": "Use few-shot prompting that includes the example demonstrations.",
+     "correct": true,
+     "explanation": "Few-shot prompting leverages a handful of examples immediately and is the right tool when labeled data is scarce."
+    },
+    {
+     "text": "Fine-tune the model on the 30 examples.",
+     "correct": false,
+     "explanation": "Roughly 30 examples are generally too few to fine-tune effectively and risk overfitting with little gain."
+    },
+    {
+     "text": "Run continued pre-training.",
+     "correct": false,
+     "explanation": "Continued pre-training needs a large unlabeled corpus, not 30 examples."
+    },
+    {
+     "text": "Distill the model.",
+     "correct": false,
+     "explanation": "Distillation addresses cost/latency, not teaching a behavior from a few examples."
+    }
+   ]
+  },
+  {
+   "id": "1.2-v16",
+   "task": "1.2",
+   "type": "multi",
+   "question": "A summarizer sometimes truncates mid-sentence, but the team also wants to prevent runaway, overly long outputs. Which TWO settings TOGETHER best address both? (Select TWO.)",
+   "options": [
+    {
+     "text": "Increase maxTokens enough to fit a complete answer.",
+     "correct": true,
+     "explanation": "Mid-sentence truncation means the output is hitting the token cap, so raising maxTokens to a sufficient size lets answers complete."
+    },
+    {
+     "text": "Add a stop sequence at the natural end-of-answer marker.",
+     "correct": true,
+     "explanation": "A stop sequence ends generation cleanly at the intended boundary, preventing runaway length."
+    },
+    {
+     "text": "Lower the temperature.",
+     "correct": false,
+     "explanation": "Temperature affects randomness, not truncation or maximum length."
+    },
+    {
+     "text": "Increase top-k.",
+     "correct": false,
+     "explanation": "Top-k changes token diversity, not output length."
+    },
+    {
+     "text": "Enlarge the model's context window.",
+     "correct": false,
+     "explanation": "The context window governs input size, not how long the output may be."
+    }
+   ]
+  },
+  {
+   "id": "1.3-v1",
+   "task": "1.3",
+   "type": "single",
+   "question": "Before fine-tuning on customer chat transcripts, a team must programmatically REMOVE PII from the free text across a large dataset. Which service is the right tool?",
+   "options": [
+    {
+     "text": "Amazon Comprehend PII detection and redaction.",
+     "correct": true,
+     "explanation": "Comprehend detects and redacts PII entities within text, producing sanitized transcripts for training."
+    },
+    {
+     "text": "Amazon Macie.",
+     "correct": false,
+     "explanation": "Macie discovers and classifies sensitive data across S3 but does not redact PII inside text for downstream training."
+    },
+    {
+     "text": "Amazon Bedrock Guardrails sensitive-information filter.",
+     "correct": false,
+     "explanation": "Guardrails apply at inference time to a model's prompts/responses; they are not a batch redaction tool for preparing a training corpus."
+    },
+    {
+     "text": "Amazon Textract.",
+     "correct": false,
+     "explanation": "Textract extracts text from documents; it does not detect or redact PII."
+    }
+   ]
+  },
+  {
+   "id": "1.3-v2",
+   "task": "1.3",
+   "type": "single",
+   "question": "A governance team must INVENTORY where PII resides across 500 Amazon S3 buckets before deciding how to process it. Which service fits BEST?",
+   "options": [
+    {
+     "text": "Amazon Macie.",
+     "correct": true,
+     "explanation": "Macie is built to discover and classify sensitive data and PII across S3 at scale, producing the inventory the team needs."
+    },
+    {
+     "text": "Amazon Comprehend.",
+     "correct": false,
+     "explanation": "Comprehend analyzes and redacts PII within individual text inputs but is not a bucket-scale discovery/classification inventory tool."
+    },
+    {
+     "text": "Amazon Bedrock Guardrails.",
+     "correct": false,
+     "explanation": "Guardrails govern model I/O at inference; they do not scan storage for sensitive data."
+    },
+    {
+     "text": "Amazon S3 Inventory.",
+     "correct": false,
+     "explanation": "S3 Inventory lists objects and metadata but does not classify which contain PII."
+    }
+   ]
+  },
+  {
+   "id": "1.3-v3",
+   "task": "1.3",
+   "type": "single",
+   "question": "A team needs human-labeled instruction/response pairs with a managed workforce option and built-in quality controls (annotation consolidation). Which service is BEST?",
+   "options": [
+    {
+     "text": "Amazon SageMaker Ground Truth.",
+     "correct": true,
+     "explanation": "Ground Truth provides managed labeling workflows, workforce options, and quality features such as annotation consolidation."
+    },
+    {
+     "text": "Raw Amazon Mechanical Turk tasks.",
+     "correct": false,
+     "explanation": "Mechanical Turk supplies a crowd but lacks the managed labeling workflow, templates, and consolidation that Ground Truth adds."
+    },
+    {
+     "text": "Amazon SageMaker Data Wrangler.",
+     "correct": false,
+     "explanation": "Data Wrangler transforms tabular data; it does not run human annotation."
+    },
+    {
+     "text": "Amazon Comprehend custom classification.",
+     "correct": false,
+     "explanation": "Comprehend automates classification; it is not a human-labeling service for creating new pairs."
+    }
+   ]
+  },
+  {
+   "id": "1.3-v4",
+   "task": "1.3",
+   "type": "single",
+   "question": "Millions of raw JSON documents must be cleaned, normalized, and partitioned every night as a repeatable, serverless production pipeline with the least operational overhead. Which service is BEST?",
+   "options": [
+    {
+     "text": "AWS Glue serverless ETL jobs.",
+     "correct": true,
+     "explanation": "Glue runs scheduled, serverless Spark ETL for large-scale cleaning/partitioning with no clusters to manage."
+    },
+    {
+     "text": "Amazon SageMaker Data Wrangler.",
+     "correct": false,
+     "explanation": "Data Wrangler is an interactive, notebook-oriented prep tool, not a hands-off serverless nightly production pipeline at this scale."
+    },
+    {
+     "text": "An Amazon EMR Spark cluster.",
+     "correct": false,
+     "explanation": "EMR is capable but requires provisioning and managing cluster capacity."
+    },
+    {
+     "text": "One AWS Lambda invocation per file.",
+     "correct": false,
+     "explanation": "Per-file Lambda processing is hard to orchestrate at this scale and hits timeout limits."
+    }
+   ]
+  },
+  {
+   "id": "1.3-v5",
+   "task": "1.3",
+   "type": "single",
+   "question": "A developer must provide a SUPERVISED fine-tuning dataset to Amazon Bedrock. What is the correct format and location?",
+   "options": [
+    {
+     "text": "A JSONL file of prompt/completion (or messages) examples in Amazon S3 matching the model's schema.",
+     "correct": true,
+     "explanation": "Bedrock customization reads labeled examples as JSONL records from S3 in the required schema."
+    },
+    {
+     "text": "A CSV export of raw documents in S3.",
+     "correct": false,
+     "explanation": "Raw documents are not labeled prompt/response pairs; this is not a supervised fine-tuning dataset."
+    },
+    {
+     "text": "A folder of PDFs in S3.",
+     "correct": false,
+     "explanation": "An unstructured PDF corpus suits RAG ingestion, not supervised fine-tuning."
+    },
+    {
+     "text": "An Amazon DynamoDB table of examples.",
+     "correct": false,
+     "explanation": "Fine-tuning reads from S3 in the required file format, not from DynamoDB."
+    }
+   ]
+  },
+  {
+   "id": "1.3-v6",
+   "task": "1.3",
+   "type": "single",
+   "question": "A team must measure representation imbalance in the TRAINING DATASET before any training begins. Which capability is correct?",
+   "options": [
+    {
+     "text": "Amazon SageMaker Clarify pre-training bias metrics.",
+     "correct": true,
+     "explanation": "Clarify computes pre-training bias metrics directly on the dataset before training."
+    },
+    {
+     "text": "Amazon SageMaker Clarify post-training bias metrics.",
+     "correct": false,
+     "explanation": "Post-training metrics evaluate a trained model's predictions, not the dataset before training."
+    },
+    {
+     "text": "Amazon SageMaker Model Monitor.",
+     "correct": false,
+     "explanation": "Model Monitor detects drift on a deployed endpoint, not dataset bias before training."
+    },
+    {
+     "text": "Amazon Comprehend.",
+     "correct": false,
+     "explanation": "Comprehend performs NLP tasks, not dataset bias measurement."
+    }
+   ]
+  },
+  {
+   "id": "1.3-v7",
+   "task": "1.3",
+   "type": "single",
+   "question": "A governance team must publish a standardized, human-readable record of each model's intended use, training data, evaluation, and risk rating for audits. Which feature is BEST?",
+   "options": [
+    {
+     "text": "Amazon SageMaker Model Cards.",
+     "correct": true,
+     "explanation": "Model Cards capture intended use, training details, evaluation, and risk in a standardized, versioned, auditable document."
+    },
+    {
+     "text": "Amazon SageMaker ML Lineage Tracking.",
+     "correct": false,
+     "explanation": "Lineage tracking records artifact/step graphs automatically; it is not the human-readable governance document of intended use and risk."
+    },
+    {
+     "text": "AWS CloudTrail.",
+     "correct": false,
+     "explanation": "CloudTrail logs API activity, not model governance documentation."
+    },
+    {
+     "text": "AWS Config.",
+     "correct": false,
+     "explanation": "Config tracks resource configuration compliance, not model documentation."
+    }
+   ]
+  },
+  {
+   "id": "1.3-v8",
+   "task": "1.3",
+   "type": "single",
+   "question": "A team must AUTOMATICALLY track which dataset version and which processing job produced a given model artifact, as a queryable lineage graph. Which capability is correct?",
+   "options": [
+    {
+     "text": "Amazon SageMaker ML Lineage Tracking.",
+     "correct": true,
+     "explanation": "ML Lineage Tracking automatically records the entities and relationships (datasets, jobs, models) as a queryable lineage graph."
+    },
+    {
+     "text": "Amazon SageMaker Model Cards.",
+     "correct": false,
+     "explanation": "Model Cards are a manually authored governance document, not an automatic artifact-lineage graph."
+    },
+    {
+     "text": "AWS Glue Data Catalog.",
+     "correct": false,
+     "explanation": "The Data Catalog inventories data sources; it does not track model-artifact lineage."
+    },
+    {
+     "text": "AWS CloudTrail.",
+     "correct": false,
+     "explanation": "CloudTrail records API calls, not a model-artifact lineage graph."
+    }
+   ]
+  },
+  {
+   "id": "1.3-v9",
+   "task": "1.3",
+   "type": "multi",
+   "question": "A team is preparing a fine-tuning dataset and wants to minimize overfitting and train/test leakage. Which TWO steps best support this? (Select TWO.)",
+   "options": [
+    {
+     "text": "Deduplicate near-duplicate examples.",
+     "correct": true,
+     "explanation": "Removing duplicates prevents the model from overweighting repeated samples and reduces overfitting."
+    },
+    {
+     "text": "Create a held-out test split that does not overlap the training data.",
+     "correct": true,
+     "explanation": "A non-overlapping evaluation split prevents leakage and gives an honest generalization estimate."
+    },
+    {
+     "text": "Oversample the majority class to grow the dataset.",
+     "correct": false,
+     "explanation": "Oversampling the majority worsens imbalance and encourages overfitting."
+    },
+    {
+     "text": "Include the evaluation questions in the training set for coverage.",
+     "correct": false,
+     "explanation": "Putting test items into training is textbook data leakage."
+    },
+    {
+     "text": "Increase the number of training epochs.",
+     "correct": false,
+     "explanation": "Epoch count is a training hyperparameter, not a data-preparation step, and more epochs can overfit."
+    }
+   ]
+  },
+  {
+   "id": "1.4-v1",
+   "task": "1.4",
+   "type": "single",
+   "question": "A Bedrock knowledge base needs a fully managed vector store for HIGH query-per-second, LOW-latency similarity search with no capacity planning. Which option is BEST?",
+   "options": [
+    {
+     "text": "Amazon OpenSearch Serverless.",
+     "correct": true,
+     "explanation": "OpenSearch Serverless is the natively integrated, auto-scaling managed vector store suited to frequent, low-latency queries without capacity planning."
+    },
+    {
+     "text": "Amazon Aurora PostgreSQL with pgvector.",
+     "correct": false,
+     "explanation": "Aurora pgvector is supported but you size and manage the database instance; it is not the auto-scaling serverless choice for high QPS."
+    },
+    {
+     "text": "Amazon S3 Vectors.",
+     "correct": false,
+     "explanation": "S3 Vectors optimizes cost for infrequent queries at huge scale, not high-QPS low-latency search."
+    },
+    {
+     "text": "Amazon Neptune Analytics.",
+     "correct": false,
+     "explanation": "Neptune Analytics powers GraphRAG over relationships, not general high-QPS vector search."
+    }
+   ]
+  },
+  {
+   "id": "1.4-v2",
+   "task": "1.4",
+   "type": "single",
+   "question": "A corpus of billions of embeddings is queried only a few times per month for occasional investigations. The team wants the lowest-cost durable vector storage with no capacity to manage. Which option is BEST?",
+   "options": [
+    {
+     "text": "Amazon S3 Vectors.",
+     "correct": true,
+     "explanation": "S3 Vectors gives serverless, pay-for-use vector storage and search at massive scale, ideal for infrequent queries."
+    },
+    {
+     "text": "Amazon OpenSearch Serverless.",
+     "correct": false,
+     "explanation": "OpenSearch Serverless keeps warm capacity you pay for, which is wasteful for queries a few times a month."
+    },
+    {
+     "text": "Amazon Aurora PostgreSQL with pgvector.",
+     "correct": false,
+     "explanation": "Aurora requires running instances and is not the lowest-cost option for rarely queried, very large vector sets."
+    },
+    {
+     "text": "Amazon DynamoDB.",
+     "correct": false,
+     "explanation": "DynamoDB has no native vector similarity search."
+    }
+   ]
+  },
+  {
+   "id": "1.4-v3",
+   "task": "1.4",
+   "type": "single",
+   "question": "Embeddings must live ALONGSIDE existing relational records in the SAME managed PostgreSQL database for transactional consistency, with minimal new technology. Which option is BEST?",
+   "options": [
+    {
+     "text": "Amazon Aurora PostgreSQL with the pgvector extension.",
+     "correct": true,
+     "explanation": "Aurora PostgreSQL with pgvector keeps vectors next to relational data in one transactional database with familiar tooling."
+    },
+    {
+     "text": "Amazon OpenSearch Serverless.",
+     "correct": false,
+     "explanation": "OpenSearch Serverless is excellent for vectors but is a separate system with no transactional co-location with the relational data."
+    },
+    {
+     "text": "Amazon S3 Vectors.",
+     "correct": false,
+     "explanation": "S3 Vectors is a separate, non-transactional store and cannot co-locate with relational records."
+    },
+    {
+     "text": "Amazon Neptune Analytics.",
+     "correct": false,
+     "explanation": "Neptune is a graph store, not a relational+vector database."
+    }
+   ]
+  },
+  {
+   "id": "1.4-v4",
+   "task": "1.4",
+   "type": "single",
+   "question": "Answering a question requires MULTI-HOP reasoning over relationships among connected entities, not just similarity to text. Which knowledge base option is BEST?",
+   "options": [
+    {
+     "text": "A knowledge base using GraphRAG with Amazon Neptune Analytics.",
+     "correct": true,
+     "explanation": "GraphRAG builds an entity-relationship graph that supports multi-hop reasoning over connections."
+    },
+    {
+     "text": "A vector-only knowledge base with more results returned.",
+     "correct": false,
+     "explanation": "Returning more similar chunks does not provide explicit multi-hop relationship traversal."
+    },
+    {
+     "text": "Aurora PostgreSQL with pgvector.",
+     "correct": false,
+     "explanation": "pgvector does similarity search, not graph multi-hop reasoning."
+    },
+    {
+     "text": "A structured-data (text-to-SQL) knowledge base.",
+     "correct": false,
+     "explanation": "Structured-data retrieval handles tabular aggregation, not entity-to-entity multi-hop reasoning."
+    }
+   ]
+  },
+  {
+   "id": "1.4-v5",
+   "task": "1.4",
+   "type": "single",
+   "question": "Business users ask natural-language questions that require SUMS and aggregations over an Amazon Redshift warehouse, and the assistant should generate and run the queries. Which option is BEST?",
+   "options": [
+    {
+     "text": "Amazon Bedrock Knowledge Bases with structured data retrieval (text-to-SQL).",
+     "correct": true,
+     "explanation": "Structured-data retrieval translates natural language into SQL against the warehouse, returning accurate aggregations."
+    },
+    {
+     "text": "Embed each table row as a vector and use similarity search.",
+     "correct": false,
+     "explanation": "Vector similarity over rows cannot compute sums or precise aggregations."
+    },
+    {
+     "text": "A GraphRAG knowledge base on Neptune Analytics.",
+     "correct": false,
+     "explanation": "GraphRAG reasons over relationships, not tabular aggregation."
+    },
+    {
+     "text": "Amazon QuickSight Q.",
+     "correct": false,
+     "explanation": "QuickSight Q answers over prepared BI datasets in a dashboard; it is not the Bedrock RAG generation path the assistant needs."
+    }
+   ]
+  },
+  {
+   "id": "1.4-v6",
+   "task": "1.4",
+   "type": "single",
+   "question": "A developer must fetch the top relevant chunks and then run them through their OWN prompt and a model NOT wired into the knowledge base. Which API is correct?",
+   "options": [
+    {
+     "text": "The Retrieve API.",
+     "correct": true,
+     "explanation": "Retrieve returns ranked chunks only, leaving the prompt and generation model fully under the developer's control."
+    },
+    {
+     "text": "The RetrieveAndGenerate API.",
+     "correct": false,
+     "explanation": "RetrieveAndGenerate performs the generation for you, removing the custom prompt/model control required here."
+    },
+    {
+     "text": "The RetrieveAndGenerateStream API.",
+     "correct": false,
+     "explanation": "This also performs generation (streamed), so it does not give custom prompt/model control."
+    },
+    {
+     "text": "The StartIngestionJob API.",
+     "correct": false,
+     "explanation": "StartIngestionJob ingests data; it does not retrieve chunks for a query."
+    }
+   ]
+  },
+  {
+   "id": "1.4-v7",
+   "task": "1.4",
+   "type": "single",
+   "question": "An app must show end users the exact source passages behind each answer with the LEAST custom development. Which approach is BEST?",
+   "options": [
+    {
+     "text": "Use RetrieveAndGenerate, which returns the answer with citations to the source chunks.",
+     "correct": true,
+     "explanation": "RetrieveAndGenerate produces a grounded answer plus citations with no custom attribution code."
+    },
+    {
+     "text": "Use Retrieve, then build custom generation and citation-mapping code.",
+     "correct": false,
+     "explanation": "This works but adds the custom generation and citation code the requirement wants to avoid."
+    },
+    {
+     "text": "Enable model invocation logging and surface the logs.",
+     "correct": false,
+     "explanation": "Invocation logs are operator data, not user-facing citations."
+    },
+    {
+     "text": "Ask the model in the prompt to list its sources.",
+     "correct": false,
+     "explanation": "Self-reported sources are unreliable and not verifiable citations."
+    }
+   ]
+  },
+  {
+   "id": "1.4-v8",
+   "task": "1.4",
+   "type": "single",
+   "question": "A multi-tenant SaaS uses one shared knowledge base and must GUARANTEE that a tenant can never retrieve another tenant's documents. Which design is the most secure and reliable?",
+   "options": [
+    {
+     "text": "Tag documents with tenant ID and apply a metadata filter derived from the authenticated tenant on every Retrieve call (or use a separate knowledge base per tenant).",
+     "correct": true,
+     "explanation": "A server-side filter bound to the verified identity (or full per-tenant isolation) reliably prevents cross-tenant retrieval."
+    },
+    {
+     "text": "Pass the tenant filter from the client and trust it.",
+     "correct": false,
+     "explanation": "A client-supplied, untrusted filter can be tampered with to reach other tenants' data."
+    },
+    {
+     "text": "Instruct the model in the system prompt to stay within the tenant.",
+     "correct": false,
+     "explanation": "Prompt instructions do not control retrieval and can be bypassed."
+    },
+    {
+     "text": "Rely on relevance ranking to keep tenants separate.",
+     "correct": false,
+     "explanation": "Ranking can still surface another tenant's documents; it is not an isolation control."
+    }
+   ]
+  },
+  {
+   "id": "1.4-v9",
+   "task": "1.4",
+   "type": "single",
+   "question": "Relevant passages ARE being retrieved but appear LOW in the result list, so answers miss them. The team wants to fix the ordering with the least overhead. Which option is BEST?",
+   "options": [
+    {
+     "text": "Add a Bedrock reranker model to reorder the retrieved candidates by query relevance.",
+     "correct": true,
+     "explanation": "A reranker reorders already-retrieved candidates so the most relevant passages move to the top."
+    },
+    {
+     "text": "Switch to hybrid search.",
+     "correct": false,
+     "explanation": "Hybrid search improves whether relevant items are retrieved (recall); the problem here is ordering of items already retrieved."
+    },
+    {
+     "text": "Increase the number of results returned.",
+     "correct": false,
+     "explanation": "Returning more results does not move the relevant ones to the top."
+    },
+    {
+     "text": "Re-ingest with semantic chunking.",
+     "correct": false,
+     "explanation": "Re-chunking is a heavier ingestion change and does not directly reorder results."
+    }
+   ]
+  },
+  {
+   "id": "1.4-v10",
+   "task": "1.4",
+   "type": "single",
+   "question": "Queries that contain exact product codes and acronyms are frequently MISSED by pure semantic search. Which change BEST fixes retrieval?",
+   "options": [
+    {
+     "text": "Enable hybrid search that combines semantic vectors with keyword matching.",
+     "correct": true,
+     "explanation": "Hybrid search adds keyword matching so exact tokens like product codes are found alongside semantic matches."
+    },
+    {
+     "text": "Add a reranker model.",
+     "correct": false,
+     "explanation": "A reranker reorders retrieved items but cannot surface an exact-keyword match that the vector search failed to retrieve."
+    },
+    {
+     "text": "Increase the embedding dimensions.",
+     "correct": false,
+     "explanation": "Higher dimensions do not reliably solve exact-token matching."
+    },
+    {
+     "text": "Raise the generation temperature.",
+     "correct": false,
+     "explanation": "Temperature affects generation, not retrieval of exact terms."
+    }
+   ]
+  },
+  {
+   "id": "1.4-v11",
+   "task": "1.4",
+   "type": "single",
+   "question": "Content must be ingested into one knowledge base from Amazon S3, Confluence, and SharePoint with the LEAST custom code. What should the team do?",
+   "options": [
+    {
+     "text": "Use the built-in Bedrock knowledge base data source connectors for each source.",
+     "correct": true,
+     "explanation": "Managed connectors for S3, Confluence, SharePoint, and others ingest the content without custom code."
+    },
+    {
+     "text": "Write custom crawlers that copy everything to S3 first.",
+     "correct": false,
+     "explanation": "Custom crawlers add development and maintenance the connectors remove."
+    },
+    {
+     "text": "Manually export each source to S3 on a schedule.",
+     "correct": false,
+     "explanation": "Manual exports are brittle and lag behind source changes."
+    },
+    {
+     "text": "Fine-tune the model on each source instead of ingesting.",
+     "correct": false,
+     "explanation": "Fine-tuning is not ingestion and does not keep content current."
+    }
+   ]
+  },
+  {
+   "id": "1.4-v12",
+   "task": "1.4",
+   "type": "single",
+   "question": "A RetrieveAndGenerate chat must keep context across follow-up questions with the LEAST custom state management. Which approach is BEST?",
+   "options": [
+    {
+     "text": "Pass a session identifier to RetrieveAndGenerate so Bedrock maintains the conversation context.",
+     "correct": true,
+     "explanation": "The session ID preserves multi-turn context without the developer building custom conversation state."
+    },
+    {
+     "text": "Store every message in DynamoDB and rebuild the prompt each turn.",
+     "correct": false,
+     "explanation": "Manual state assembly is more work than the built-in session support."
+    },
+    {
+     "text": "Re-embed the chat history into the vector store each turn.",
+     "correct": false,
+     "explanation": "Re-embedding history is costly and is not how session context is maintained."
+    },
+    {
+     "text": "Use a model with a larger context window.",
+     "correct": false,
+     "explanation": "A larger window does not automatically carry prior turns into each call."
+    }
+   ]
+  },
+  {
+   "id": "1.4-v13",
+   "task": "1.4",
+   "type": "single",
+   "question": "Complex, multi-part questions retrieve passages for only ONE part, yielding incomplete answers. Which built-in capability BEST addresses this?",
+   "options": [
+    {
+     "text": "Enable query decomposition (reformulation) so the knowledge base splits the question into sub-queries.",
+     "correct": true,
+     "explanation": "Decomposition retrieves passages for each sub-question, improving coverage and completeness."
+    },
+    {
+     "text": "Increase the number of results returned.",
+     "correct": false,
+     "explanation": "More results add noise but do not ensure each sub-question is covered."
+    },
+    {
+     "text": "Add a reranker model.",
+     "correct": false,
+     "explanation": "Reranking reorders retrieved items but cannot fetch passages for an unaddressed sub-question."
+    },
+    {
+     "text": "Switch to a larger generation model.",
+     "correct": false,
+     "explanation": "A larger model cannot use passages that were never retrieved."
+    }
+   ]
+  },
+  {
+   "id": "1.4-v14",
+   "task": "1.4",
+   "type": "single",
+   "question": "New and deleted documents in Amazon S3 must be reflected in a Bedrock knowledge base quickly, WITHOUT re-scanning the entire source each time, in a scalable and resilient way. Which design is BEST?",
+   "options": [
+    {
+     "text": "Send S3 object-created/deleted events to an SQS queue, and have a Lambda call the incremental IngestKnowledgeBaseDocuments / DeleteKnowledgeBaseDocuments APIs.",
+     "correct": true,
+     "explanation": "Event-driven SQS buffering with the incremental document APIs updates only changed items and adds retries/resilience."
+    },
+    {
+     "text": "On every change, call StartIngestionJob to sync the whole data source.",
+     "correct": false,
+     "explanation": "StartIngestionJob re-scans the source, which is inefficient and not incremental."
+    },
+    {
+     "text": "Invoke a Lambda directly from S3 events with no queue.",
+     "correct": false,
+     "explanation": "Direct invocation lacks buffering and retries and can fail under load."
+    },
+    {
+     "text": "Run an EventBridge Scheduler every 5 minutes to diff the bucket.",
+     "correct": false,
+     "explanation": "Polling on a timer is not near-real-time and is less efficient than event-driven updates."
+    }
+   ]
+  },
+  {
+   "id": "1.4-v15",
+   "task": "1.4",
+   "type": "single",
+   "question": "A team wants grounded answers WITH citations over their documents, with the least operational overhead and no retrieval pipeline to build. Which option is BEST?",
+   "options": [
+    {
+     "text": "Amazon Bedrock Knowledge Bases (managed RAG).",
+     "correct": true,
+     "explanation": "Knowledge Bases manage chunking, embeddings, the vector store, retrieval, and citations as a service."
+    },
+    {
+     "text": "Amazon Kendra by itself.",
+     "correct": false,
+     "explanation": "Kendra is enterprise search; on its own it does not provide the managed FM generation-with-citations RAG flow."
+    },
+    {
+     "text": "A custom pipeline with Lambda and a self-managed vector database.",
+     "correct": false,
+     "explanation": "A hand-built pipeline maximizes operational overhead."
+    },
+    {
+     "text": "Fine-tune a model on the documents.",
+     "correct": false,
+     "explanation": "Fine-tuning is not RAG and does not provide citations or freshness."
+    }
+   ]
+  },
+  {
+   "id": "1.4-v16",
+   "task": "1.4",
+   "type": "single",
+   "question": "A RAG assistant returns confident answers that the retrieved passages do not actually support. The team wants a MANAGED, tunable way to block ungrounded responses. Which option is BEST?",
+   "options": [
+    {
+     "text": "Enable the Amazon Bedrock Guardrails contextual grounding check with a tuned threshold.",
+     "correct": true,
+     "explanation": "The contextual grounding check scores whether a response is supported by the source and can block low-scoring answers."
+    },
+    {
+     "text": "Add a reranker model.",
+     "correct": false,
+     "explanation": "A reranker improves ordering of retrieved passages but does not verify or block ungrounded generation."
+    },
+    {
+     "text": "Lower the temperature.",
+     "correct": false,
+     "explanation": "Lower randomness does not guarantee grounding in the retrieved context."
+    },
+    {
+     "text": "Switch to a larger model.",
+     "correct": false,
+     "explanation": "A larger model can still produce ungrounded answers without a grounding control."
+    }
+   ]
+  },
+  {
+   "id": "1.5-v1",
+   "task": "1.5",
+   "type": "single",
+   "question": "Retrieval must MATCH on small, precise text units but then give the language model the BROADER surrounding context for those matches. Which chunking strategy is BEST?",
+   "options": [
+    {
+     "text": "Hierarchical (parent-child) chunking.",
+     "correct": true,
+     "explanation": "Hierarchical chunking matches on small child chunks for precision and supplies the larger parent chunk as context for generation."
+    },
+    {
+     "text": "Semantic chunking.",
+     "correct": false,
+     "explanation": "Semantic chunking yields coherent chunks but does not provide the parent-context-on-child-match behavior required here."
+    },
+    {
+     "text": "Large fixed-size chunking.",
+     "correct": false,
+     "explanation": "Large fixed chunks sacrifice precise matching on small units."
+    },
+    {
+     "text": "No chunking.",
+     "correct": false,
+     "explanation": "Treating each document as one chunk loses the precise small-unit matching."
+    }
+   ]
+  },
+  {
+   "id": "1.5-v2",
+   "task": "1.5",
+   "type": "single",
+   "question": "Long documents mix several topics. Each chunk must hold ONE coherent topic for precise matching; there is no need to also pass a larger parent context. Which strategy is BEST?",
+   "options": [
+    {
+     "text": "Semantic chunking.",
+     "correct": true,
+     "explanation": "Semantic chunking splits on meaning so each chunk is one coherent topic, which fixes topic bleed without an extra parent layer."
+    },
+    {
+     "text": "Hierarchical (parent-child) chunking.",
+     "correct": false,
+     "explanation": "Hierarchical adds a parent-context layer that is unnecessary here and does not specifically fix topic boundaries."
+    },
+    {
+     "text": "Fixed-size chunking.",
+     "correct": false,
+     "explanation": "Fixed sizes cut across topic boundaries, the root problem."
+    },
+    {
+     "text": "Only increasing chunk overlap.",
+     "correct": false,
+     "explanation": "Overlap helps boundary continuity but does not make each chunk a single coherent topic."
+    }
+   ]
+  },
+  {
+   "id": "1.5-v3",
+   "task": "1.5",
+   "type": "single",
+   "question": "Answers are frequently cut off because relevant sentences fall right at the boundary between two chunks. Which adjustment most directly fixes this?",
+   "options": [
+    {
+     "text": "Add chunk overlap so adjacent chunks share boundary text.",
+     "correct": true,
+     "explanation": "Overlap repeats boundary text so information spanning a boundary is captured in at least one chunk."
+    },
+    {
+     "text": "Reduce the chunk size.",
+     "correct": false,
+     "explanation": "Smaller chunks create MORE boundaries and can make boundary loss worse."
+    },
+    {
+     "text": "Switch to hierarchical chunking.",
+     "correct": false,
+     "explanation": "Hierarchical chunking is heavier than needed and does not specifically target boundary cut-offs."
+    },
+    {
+     "text": "Increase the number of results returned.",
+     "correct": false,
+     "explanation": "Returning more chunks does not fix content split across a boundary."
+    }
+   ]
+  },
+  {
+   "id": "1.5-v4",
+   "task": "1.5",
+   "type": "single",
+   "question": "After upgrading to a newer embedding model, retrieval quality collapsed even though documents are present. What must the team do?",
+   "options": [
+    {
+     "text": "Re-embed (re-index) the entire corpus with the new model so document and query vectors share the same space.",
+     "correct": true,
+     "explanation": "Query and document embeddings must come from the same model; switching models requires re-embedding the whole corpus."
+    },
+    {
+     "text": "Re-embed only the queries with the new model.",
+     "correct": false,
+     "explanation": "Mismatched query and document spaces still produce poor retrieval."
+    },
+    {
+     "text": "Clear the application cache.",
+     "correct": false,
+     "explanation": "Caching is unrelated to embedding-space mismatch."
+    },
+    {
+     "text": "Lower the generation temperature.",
+     "correct": false,
+     "explanation": "Temperature does not affect embedding compatibility."
+    }
+   ]
+  },
+  {
+   "id": "1.5-v5",
+   "task": "1.5",
+   "type": "single",
+   "question": "A growing vector index is too expensive. The team wants to cut storage and query cost while keeping acceptable recall. Which change helps MOST?",
+   "options": [
+    {
+     "text": "Use an embedding model with smaller output dimensions (for example, Titan Text Embeddings V2) and pick a smaller dimension.",
+     "correct": true,
+     "explanation": "Smaller-dimension embeddings shrink the index and query cost while keeping acceptable recall."
+    },
+    {
+     "text": "Use the maximum embedding dimension available.",
+     "correct": false,
+     "explanation": "Maximum dimensions increase storage and cost."
+    },
+    {
+     "text": "Store each chunk twice for redundancy.",
+     "correct": false,
+     "explanation": "Duplication increases cost without improving accuracy."
+    },
+    {
+     "text": "Switch to a multimodal embedding model.",
+     "correct": false,
+     "explanation": "Multimodal embeddings are for image+text retrieval and do not reduce text storage cost."
+    }
+   ]
+  },
+  {
+   "id": "1.5-v6",
+   "task": "1.5",
+   "type": "single",
+   "question": "Evaluation shows the correct passage EXISTS in the store but is sometimes NOT returned, so the model lacks the facts to answer. Which change should the team try FIRST?",
+   "options": [
+    {
+     "text": "Increase the number of results (top-k) returned per query.",
+     "correct": true,
+     "explanation": "Returning more candidates raises recall so the correct passage is more likely included."
+    },
+    {
+     "text": "Add a reranker model.",
+     "correct": false,
+     "explanation": "A reranker reorders retrieved results but cannot rank a passage that was never retrieved."
+    },
+    {
+     "text": "Reduce the chunk overlap.",
+     "correct": false,
+     "explanation": "Less overlap does not improve whether the missing passage is retrieved."
+    },
+    {
+     "text": "Lower the temperature.",
+     "correct": false,
+     "explanation": "Temperature affects generation, not retrieval recall."
+    }
+   ]
+  },
+  {
+   "id": "1.5-v7",
+   "task": "1.5",
+   "type": "single",
+   "question": "Chunks were configured very large, so retrieval returns passages where the relevant sentence is buried among unrelated text and match quality is weak. Which change is BEST?",
+   "options": [
+    {
+     "text": "Reduce the chunk size to more focused units of meaning.",
+     "correct": true,
+     "explanation": "Smaller, focused chunks produce embeddings that better represent specific content, improving match precision."
+    },
+    {
+     "text": "Increase the chunk size further.",
+     "correct": false,
+     "explanation": "Larger chunks dilute the embedding more and worsen precision."
+    },
+    {
+     "text": "Add more chunk overlap.",
+     "correct": false,
+     "explanation": "Overlap addresses boundaries, not the dilution caused by oversized chunks."
+    },
+    {
+     "text": "Increase the embedding dimensions.",
+     "correct": false,
+     "explanation": "Dimension size does not fix oversized, diluted chunks."
+    }
+   ]
+  },
+  {
+   "id": "1.5-v8",
+   "task": "1.5",
+   "type": "single",
+   "question": "A knowledge base ingests many short, self-contained FAQ entries, where each file is already one complete question-and-answer. Which chunking choice is BEST?",
+   "options": [
+    {
+     "text": "Use a no-chunking strategy so each short file is one chunk.",
+     "correct": true,
+     "explanation": "When each file is already atomic, no chunking preserves the complete meaning per entry."
+    },
+    {
+     "text": "Apply small fixed-size chunking to every file.",
+     "correct": false,
+     "explanation": "Splitting atomic FAQ entries fragments coherent answers."
+    },
+    {
+     "text": "Merge all FAQ files into one chunk.",
+     "correct": false,
+     "explanation": "Merging unrelated entries dilutes each entry's embedding."
+    },
+    {
+     "text": "Use hierarchical chunking.",
+     "correct": false,
+     "explanation": "Hierarchical structure is unnecessary for already-atomic entries."
+    }
+   ]
+  },
+  {
+   "id": "1.5-v9",
+   "task": "1.5",
+   "type": "single",
+   "question": "A catalog must be searchable by EITHER a text query or an image query against the same items. Which embedding approach supports this?",
+   "options": [
+    {
+     "text": "Use a multimodal embedding model (such as Amazon Titan Multimodal Embeddings) so images and text share one vector space.",
+     "correct": true,
+     "explanation": "Multimodal embeddings place images and text in a shared space, enabling cross-modal similarity search."
+    },
+    {
+     "text": "Use a text-only embedding model for everything.",
+     "correct": false,
+     "explanation": "A text-only model cannot embed images for similarity search."
+    },
+    {
+     "text": "Index Amazon Rekognition labels only.",
+     "correct": false,
+     "explanation": "Label detection is not a shared semantic embedding space for text-and-image retrieval."
+    },
+    {
+     "text": "Embed base64 image strings as text.",
+     "correct": false,
+     "explanation": "Embedding base64 as text does not capture visual semantics."
+    }
+   ]
+  },
+  {
+   "id": "1.5-v10",
+   "task": "1.5",
+   "type": "multi",
+   "question": "A team wants to raise the overall quality of what their RAG system retrieves and answers. Which TWO techniques are most effective? (Select TWO.)",
+   "options": [
+    {
+     "text": "Choose a chunking strategy (semantic or hierarchical) aligned to the documents' structure.",
+     "correct": true,
+     "explanation": "Structure-aligned chunking produces more coherent, relevant chunks and better retrieval."
+    },
+    {
+     "text": "Add a reranking step to reorder retrieved candidates by relevance.",
+     "correct": true,
+     "explanation": "A reranker moves the most relevant passages to the top for generation."
+    },
+    {
+     "text": "Raise the generation temperature for variety.",
+     "correct": false,
+     "explanation": "Higher temperature increases randomness and does not improve retrieval quality."
+    },
+    {
+     "text": "Increase maxTokens on the response.",
+     "correct": false,
+     "explanation": "Output length does not change which passages are retrieved."
+    },
+    {
+     "text": "Always return only the single top result.",
+     "correct": false,
+     "explanation": "Returning just one result can drop relevant passages and reduce answer quality."
+    }
+   ]
+  },
+  {
+   "id": "1.6-v1",
+   "task": "1.6",
+   "type": "single",
+   "question": "A team must A/B test two wordings of a production prompt and revert instantly if one underperforms, WITHOUT redeploying application code. Which option is BEST?",
+   "options": [
+    {
+     "text": "Amazon Bedrock Prompt Management with versioned prompts and variants.",
+     "correct": true,
+     "explanation": "Managed prompt versions/variants allow comparison and instant switch/rollback with no code deploy."
+    },
+    {
+     "text": "Hard-code both prompts behind an application feature flag.",
+     "correct": false,
+     "explanation": "A feature flag still requires a code deploy to ship the prompts and lacks managed versioning/evaluation."
+    },
+    {
+     "text": "Deploy two Lambda functions, each hard-coding one prompt.",
+     "correct": false,
+     "explanation": "This is custom, requires code deploys, and has no managed prompt versioning."
+    },
+    {
+     "text": "Adjust the temperature to switch behavior.",
+     "correct": false,
+     "explanation": "Temperature does not select between prompt wordings."
+    }
+   ]
+  },
+  {
+   "id": "1.6-v2",
+   "task": "1.6",
+   "type": "single",
+   "question": "A developer must cap response length to control cost and avoid overly long chat outputs. Which inference setting is correct?",
+   "options": [
+    {
+     "text": "Set the maxTokens (maximum output tokens) parameter.",
+     "correct": true,
+     "explanation": "maxTokens directly bounds output length and cost."
+    },
+    {
+     "text": "Raise the temperature.",
+     "correct": false,
+     "explanation": "Temperature changes randomness, not maximum length."
+    },
+    {
+     "text": "Increase top-k.",
+     "correct": false,
+     "explanation": "Top-k changes token diversity, not length."
+    },
+    {
+     "text": "Add unrelated stop sequences.",
+     "correct": false,
+     "explanation": "Unrelated stop sequences do not reliably cap general length."
+    }
+   ]
+  },
+  {
+   "id": "1.6-v3",
+   "task": "1.6",
+   "type": "single",
+   "question": "Durable behavior rules (role, tone, safety constraints) must govern EVERY turn of a conversation, separate from each user question. Where should they go?",
+   "options": [
+    {
+     "text": "In the system prompt.",
+     "correct": true,
+     "explanation": "The system prompt sets persistent instructions that apply across the conversation, separate from per-turn user messages."
+    },
+    {
+     "text": "Appended by the user to each message.",
+     "correct": false,
+     "explanation": "Relying on users to repeat rules is inconsistent and unreliable."
+    },
+    {
+     "text": "In the temperature setting.",
+     "correct": false,
+     "explanation": "Temperature is a sampling parameter, not a place for rules."
+    },
+    {
+     "text": "In the stop sequences list.",
+     "correct": false,
+     "explanation": "Stop sequences end generation; they do not encode behavior rules."
+    }
+   ]
+  },
+  {
+   "id": "1.6-v4",
+   "task": "1.6",
+   "type": "single",
+   "question": "Outputs must follow a precise structured format, instructions alone have not worked, and the team needs a fix QUICKLY without a training step. Which technique is BEST?",
+   "options": [
+    {
+     "text": "Add a few worked examples (few-shot exemplars) of the exact format to the prompt.",
+     "correct": true,
+     "explanation": "Few-shot examples show the model the precise structure to imitate and require no training."
+    },
+    {
+     "text": "Fine-tune the model on formatting examples.",
+     "correct": false,
+     "explanation": "Fine-tuning is heavier and slower than needed when few-shot prompting can fix formatting quickly."
+    },
+    {
+     "text": "Increase the temperature.",
+     "correct": false,
+     "explanation": "Higher temperature increases variability and undermines format consistency."
+    },
+    {
+     "text": "Shorten the prompt to one sentence.",
+     "correct": false,
+     "explanation": "Over-shortening removes the structure cues the model needs."
+    }
+   ]
+  },
+  {
+   "id": "1.6-v5",
+   "task": "1.6",
+   "type": "single",
+   "question": "Several applications reuse the same prompt with only a few values changing per request, and the team wants central management with runtime value injection. Which approach is BEST?",
+   "options": [
+    {
+     "text": "Amazon Bedrock Prompt Management templates with input variables.",
+     "correct": true,
+     "explanation": "Parameterized managed templates are reused centrally and take values at invocation time."
+    },
+    {
+     "text": "Copy the prompt into each application and edit by hand.",
+     "correct": false,
+     "explanation": "Duplicated prompts drift and are hard to govern centrally."
+    },
+    {
+     "text": "Concatenate strings ad hoc in each service.",
+     "correct": false,
+     "explanation": "Ad hoc concatenation has no central governance or versioning."
+    },
+    {
+     "text": "Raise the temperature to make the prompt flexible.",
+     "correct": false,
+     "explanation": "Temperature does not parameterize or manage prompts."
+    }
+   ]
+  },
+  {
+   "id": "1.6-v6",
+   "task": "1.6",
+   "type": "single",
+   "question": "A developer needs a MANAGED, low-code way to build and version a multi-step generative workflow with branching (classify, then retrieve, then generate). Which Amazon Bedrock feature is BEST?",
+   "options": [
+    {
+     "text": "Amazon Bedrock Flows (prompt flows).",
+     "correct": true,
+     "explanation": "Bedrock Flows visually build and version multi-step, branching workflows chaining prompts, knowledge bases, and other components with little code."
+    },
+    {
+     "text": "Amazon Bedrock Agents.",
+     "correct": false,
+     "explanation": "Agents provide autonomous tool-using reasoning, which is heavier and different from a defined, branching prompt-chain workflow."
+    },
+    {
+     "text": "Hand-built AWS Step Functions wiring each step.",
+     "correct": false,
+     "explanation": "Step Functions can orchestrate but require more custom build than a managed flow builder."
+    },
+    {
+     "text": "A single InvokeModel call.",
+     "correct": false,
+     "explanation": "One call cannot orchestrate a multi-step, branching workflow."
+    }
+   ]
+  },
+  {
+   "id": "1.6-v7",
+   "task": "1.6",
+   "type": "single",
+   "question": "A regression suite needs the same prompt to produce as close to identical output as possible on each run. Which SINGLE parameter change most increases determinism?",
+   "options": [
+    {
+     "text": "Set the temperature to 0.",
+     "correct": true,
+     "explanation": "A temperature of 0 makes decoding effectively greedy, maximizing run-to-run consistency."
+    },
+    {
+     "text": "Set a very high top-k.",
+     "correct": false,
+     "explanation": "A high top-k widens sampling and increases variability."
+    },
+    {
+     "text": "Increase maxTokens.",
+     "correct": false,
+     "explanation": "Output length does not control determinism."
+    },
+    {
+     "text": "Raise the temperature to 1.",
+     "correct": false,
+     "explanation": "A high temperature maximizes randomness."
+    }
+   ]
+  },
+  {
+   "id": "1.6-v8",
+   "task": "1.6",
+   "type": "single",
+   "question": "In a RAG assistant, the team wants to reduce fabricated answers by making the model rely only on the supplied context and admit when the answer is absent. Which prompt technique helps MOST?",
+   "options": [
+    {
+     "text": "Instruct the model to answer only from the provided context and to say it does not know when the context lacks the answer.",
+     "correct": true,
+     "explanation": "Explicit grounding plus an allowed abstention reduces fabrication when the context does not contain the answer."
+    },
+    {
+     "text": "Raise the temperature for more creative answers.",
+     "correct": false,
+     "explanation": "More creativity increases fabrication."
+    },
+    {
+     "text": "Remove the retrieved context to shorten prompts.",
+     "correct": false,
+     "explanation": "Without context the model must guess, increasing hallucination."
+    },
+    {
+     "text": "Instruct the model to always produce an answer.",
+     "correct": false,
+     "explanation": "Forcing an answer encourages fabrication when information is missing."
+    }
+   ]
+  },
+  {
+   "id": "1.6-v9",
+   "task": "1.6",
+   "type": "multi",
+   "question": "A developer must prevent unbounded, runaway generations that drive up cost and ramble past the answer. Which TWO controls directly help? (Select TWO.)",
+   "options": [
+    {
+     "text": "Set a sensible maxTokens limit.",
+     "correct": true,
+     "explanation": "maxTokens caps how many tokens can be generated, bounding cost and runaway length."
+    },
+    {
+     "text": "Define stop sequences that end generation at a known marker.",
+     "correct": true,
+     "explanation": "Stop sequences halt generation at a defined boundary so the model does not ramble on."
+    },
+    {
+     "text": "Increase the temperature.",
+     "correct": false,
+     "explanation": "Higher temperature does not limit length and can make output more verbose."
+    },
+    {
+     "text": "Increase top-k substantially.",
+     "correct": false,
+     "explanation": "Top-k affects diversity, not length."
+    },
+    {
+     "text": "Enlarge the context window.",
+     "correct": false,
+     "explanation": "The context window governs input size, not output length."
+    }
+   ]
+  },
+  {
+   "id": "1.6-v10",
+   "task": "1.6",
+   "type": "single",
+   "question": "A model's outputs occasionally include bizarre, very low-probability words. The team wants to remove that long tail of unlikely tokens while keeping SOME variety. Which single adjustment is BEST?",
+   "options": [
+    {
+     "text": "Lower top-p (nucleus sampling) so only the most probable tokens are eligible.",
+     "correct": true,
+     "explanation": "A lower top-p trims the low-probability tail while still allowing variety among the top tokens, directly removing bizarre word choices."
+    },
+    {
+     "text": "Set temperature to 0.",
+     "correct": false,
+     "explanation": "Temperature 0 removes the tail but also eliminates the variety the team wants to keep."
+    },
+    {
+     "text": "Increase top-k substantially.",
+     "correct": false,
+     "explanation": "A larger top-k widens the candidate pool, making rare tokens more likely, not less."
+    },
+    {
+     "text": "Add stop sequences.",
+     "correct": false,
+     "explanation": "Stop sequences end generation; they do not filter the token probability distribution."
+    }
+   ]
+  },
+  {
+   "id": "2.1-v1",
+   "task": "2.1",
+   "type": "single",
+   "question": "An Amazon Bedrock agent must call an internal order-management API to look up and update orders. What is the standard way to give it that capability?",
+   "options": [
+    {
+     "text": "Define an action group backed by a Lambda function, described with an API or function schema.",
+     "correct": true,
+     "explanation": "Action groups declare callable operations via a schema and execute them through a Lambda when the agent decides to act."
+    },
+    {
+     "text": "Put the API documentation in the agent's instructions.",
+     "correct": false,
+     "explanation": "Instructions describe behavior but provide no executable tool to call the API."
+    },
+    {
+     "text": "Associate a knowledge base with the agent.",
+     "correct": false,
+     "explanation": "A knowledge base grounds answers in documents; it does not execute API actions."
+    },
+    {
+     "text": "Raise the agent model's temperature.",
+     "correct": false,
+     "explanation": "Temperature has nothing to do with tool or API access."
+    }
+   ]
+  },
+  {
+   "id": "2.1-v2",
+   "task": "2.1",
+   "type": "single",
+   "question": "For compliance, the company's OWN application must execute tool calls, while the agent still decides which action to take. Which capability supports this?",
+   "options": [
+    {
+     "text": "Configure the action group to return control to the caller, which executes the action and returns the result.",
+     "correct": true,
+     "explanation": "Return of control hands the chosen action and parameters back to the calling application to execute, rather than the agent invoking a Lambda."
+    },
+    {
+     "text": "Use an action group with a Lambda the agent invokes directly.",
+     "correct": false,
+     "explanation": "With a Lambda action group the agent executes the action, which is exactly what the compliance rule forbids."
+    },
+    {
+     "text": "Disable the agent's reasoning.",
+     "correct": false,
+     "explanation": "That would remove the agent's ability to decide which action to take."
+    },
+    {
+     "text": "Associate a knowledge base.",
+     "correct": false,
+     "explanation": "A knowledge base is for retrieval, not for delegating execution to the caller."
+    }
+   ]
+  },
+  {
+   "id": "2.1-v3",
+   "task": "2.1",
+   "type": "single",
+   "question": "An agent must ground its answers in company policy documents, with the least custom code. What should the developer do?",
+   "options": [
+    {
+     "text": "Associate an Amazon Bedrock knowledge base with the agent.",
+     "correct": true,
+     "explanation": "Associating a knowledge base lets the agent retrieve and ground responses without custom retrieval code."
+    },
+    {
+     "text": "Add an action group to fetch documents from S3.",
+     "correct": false,
+     "explanation": "Action groups execute operations; grounding from a corpus is what a knowledge base provides."
+    },
+    {
+     "text": "Paste the entire policy library into the agent instructions.",
+     "correct": false,
+     "explanation": "Instructions cannot scale to a full library or stay current."
+    },
+    {
+     "text": "Fine-tune the agent's model weekly on the policies.",
+     "correct": false,
+     "explanation": "Repeated fine-tuning is heavy and unnecessary versus a knowledge base."
+    }
+   ]
+  },
+  {
+   "id": "2.1-v4",
+   "task": "2.1",
+   "type": "single",
+   "question": "Each user's agent must remember preferences and prior context ACROSS separate sessions, as a managed AgentCore capability. Which component is correct?",
+   "options": [
+    {
+     "text": "AgentCore Memory.",
+     "correct": true,
+     "explanation": "AgentCore Memory provides managed short-term and long-term memory that persists across sessions."
+    },
+    {
+     "text": "Per-invocation session state only.",
+     "correct": false,
+     "explanation": "Session state lasts within a single session; it does not persist across sessions."
+    },
+    {
+     "text": "AgentCore Gateway.",
+     "correct": false,
+     "explanation": "Gateway exposes APIs as tools; it is not a memory store."
+    },
+    {
+     "text": "A custom DynamoDB table you build and maintain.",
+     "correct": false,
+     "explanation": "That works but is not the managed AgentCore capability the scenario asks for."
+    }
+   ]
+  },
+  {
+   "id": "2.1-v5",
+   "task": "2.1",
+   "type": "single",
+   "question": "A company wants to expose its MANY existing internal REST APIs and Lambda functions to agents as secure, governed tools without writing per-API integration code. Which AgentCore capability fits?",
+   "options": [
+    {
+     "text": "AgentCore Gateway.",
+     "correct": true,
+     "explanation": "Gateway turns existing APIs/Lambdas into agent-ready tools (for example via MCP) with built-in authentication and governance."
+    },
+    {
+     "text": "Defining a separate action group for each API in every agent.",
+     "correct": false,
+     "explanation": "Per-agent action groups require wiring each API repeatedly; Gateway centralizes existing APIs as managed tools."
+    },
+    {
+     "text": "AgentCore Code Interpreter.",
+     "correct": false,
+     "explanation": "Code Interpreter executes code; it is not an API-to-tool exposure layer."
+    },
+    {
+     "text": "AgentCore Identity.",
+     "correct": false,
+     "explanation": "Identity manages access/credentials, not exposure of APIs as tools."
+    }
+   ]
+  },
+  {
+   "id": "2.1-v6",
+   "task": "2.1",
+   "type": "single",
+   "question": "An analytics agent must safely execute Python to perform calculations and data transformations, isolated from other workloads, as a managed capability. Which AgentCore component is correct?",
+   "options": [
+    {
+     "text": "AgentCore Code Interpreter.",
+     "correct": true,
+     "explanation": "Code Interpreter gives the agent a managed, isolated sandbox to run code."
+    },
+    {
+     "text": "AgentCore Gateway.",
+     "correct": false,
+     "explanation": "Gateway exposes external tools; it is not a code-execution sandbox."
+    },
+    {
+     "text": "A self-built Lambda action group for code execution.",
+     "correct": false,
+     "explanation": "You would have to build and secure the sandbox yourself; Code Interpreter is the managed option."
+    },
+    {
+     "text": "AgentCore Browser.",
+     "correct": false,
+     "explanation": "Browser automates web pages, not arbitrary code execution."
+    }
+   ]
+  },
+  {
+   "id": "2.1-v7",
+   "task": "2.1",
+   "type": "single",
+   "question": "An agent must NAVIGATE websites and interact with web pages to complete tasks, in a managed, secure environment. Which AgentCore capability fits?",
+   "options": [
+    {
+     "text": "AgentCore Browser.",
+     "correct": true,
+     "explanation": "The Browser tool provides a managed, secure cloud browser the agent uses to navigate and interact with pages."
+    },
+    {
+     "text": "AgentCore Gateway.",
+     "correct": false,
+     "explanation": "Gateway exposes APIs as tools; it does not provide interactive web browsing."
+    },
+    {
+     "text": "AgentCore Code Interpreter.",
+     "correct": false,
+     "explanation": "Code Interpreter runs code; it is not a browser."
+    },
+    {
+     "text": "AgentCore Memory.",
+     "correct": false,
+     "explanation": "Memory persists context, not web interaction."
+    }
+   ]
+  },
+  {
+   "id": "2.1-v8",
+   "task": "2.1",
+   "type": "single",
+   "question": "Agents must securely access third-party SaaS services ON BEHALF OF users, handling tokens and consent, without a custom credential broker. Which AgentCore capability addresses this?",
+   "options": [
+    {
+     "text": "AgentCore Identity.",
+     "correct": true,
+     "explanation": "AgentCore Identity manages secure identity and access for agents, including authenticating to and accessing third-party services on a user's behalf."
+    },
+    {
+     "text": "AWS Secrets Manager.",
+     "correct": false,
+     "explanation": "Secrets Manager stores secrets but is not the agent identity/consent broker for acting on a user's behalf."
+    },
+    {
+     "text": "Amazon Cognito user pools alone.",
+     "correct": false,
+     "explanation": "Cognito authenticates end users to your app; it is not the agent's outbound identity to third-party services."
+    },
+    {
+     "text": "AgentCore Gateway.",
+     "correct": false,
+     "explanation": "Gateway exposes tools; it is not the identity/consent layer."
+    }
+   ]
+  },
+  {
+   "id": "2.1-v9",
+   "task": "2.1",
+   "type": "single",
+   "question": "A research agent has long-running, multi-minute sessions and must be deployed serverlessly with per-session isolation, regardless of the framework it was built in. Which option is BEST?",
+   "options": [
+    {
+     "text": "Amazon Bedrock AgentCore Runtime.",
+     "correct": true,
+     "explanation": "AgentCore Runtime hosts agents from any framework serverlessly with session isolation and support for long-running, streaming workloads."
+    },
+    {
+     "text": "AWS Lambda.",
+     "correct": false,
+     "explanation": "Lambda's execution time limit and lack of per-session agent isolation make it unsuitable for long, stateful agent sessions."
+    },
+    {
+     "text": "A self-managed Amazon ECS on Fargate service.",
+     "correct": false,
+     "explanation": "ECS works but requires building and operating the serving infrastructure."
+    },
+    {
+     "text": "A SageMaker real-time endpoint.",
+     "correct": false,
+     "explanation": "SageMaker endpoints serve models, not framework-agnostic agent runtimes."
+    }
+   ]
+  },
+  {
+   "id": "2.1-v10",
+   "task": "2.1",
+   "type": "single",
+   "question": "An operations team must trace WHY an agent chose a tool and inspect each reasoning step, tool call, and latency in production. Which AgentCore capability provides this?",
+   "options": [
+    {
+     "text": "AgentCore Observability.",
+     "correct": true,
+     "explanation": "Observability captures detailed traces of the agent's reasoning steps and tool invocations for debugging and monitoring."
+    },
+    {
+     "text": "AWS CloudTrail.",
+     "correct": false,
+     "explanation": "CloudTrail records API calls, not the agent's internal reasoning steps and tool decisions."
+    },
+    {
+     "text": "Bedrock model invocation logging.",
+     "correct": false,
+     "explanation": "Invocation logging captures model prompts/responses, not the agent's step-by-step tool orchestration."
+    },
+    {
+     "text": "AgentCore Memory.",
+     "correct": false,
+     "explanation": "Memory persists context; it is not a tracing tool."
+    }
+   ]
+  },
+  {
+   "id": "2.1-v11",
+   "task": "2.1",
+   "type": "single",
+   "question": "A workflow needs ONE coordinating agent to dynamically delegate subtasks to several specialized agents (billing, shipping, returns) and combine results. Which approach is BEST?",
+   "options": [
+    {
+     "text": "Use multi-agent collaboration with a supervisor agent coordinating specialized sub-agents.",
+     "correct": true,
+     "explanation": "Multi-agent collaboration lets a supervisor route subtasks to specialized agents and aggregate their outputs dynamically."
+    },
+    {
+     "text": "Build the workflow in Amazon Bedrock Flows.",
+     "correct": false,
+     "explanation": "Flows is a fixed, low-code orchestration of steps; it is not dynamic agent-to-agent delegation and reasoning."
+    },
+    {
+     "text": "Put every capability in one agent's prompt.",
+     "correct": false,
+     "explanation": "A single monolithic agent provides no structured delegation or specialization."
+    },
+    {
+     "text": "Run independent agents with no coordination.",
+     "correct": false,
+     "explanation": "Without a supervisor there is no way to combine sub-agent results."
+    }
+   ]
+  },
+  {
+   "id": "2.1-v12",
+   "task": "2.1",
+   "type": "single",
+   "question": "An agent can issue refunds, and a human must approve before any refund executes. Which Bedrock agent feature enforces this directly?",
+   "options": [
+    {
+     "text": "Enable user confirmation (require confirmation) on the sensitive action.",
+     "correct": true,
+     "explanation": "User confirmation pauses the agent for explicit human approval before the action runs."
+    },
+    {
+     "text": "Use return of control for the action.",
+     "correct": false,
+     "explanation": "Return of control changes WHERE execution happens (the caller), but it is not itself a built-in human-approval gate."
+    },
+    {
+     "text": "Add a note in the system prompt to confirm first.",
+     "correct": false,
+     "explanation": "Prompt instructions do not enforce a hard approval gate."
+    },
+    {
+     "text": "Set temperature to 0.",
+     "correct": false,
+     "explanation": "Temperature does not create an approval step."
+    }
+   ]
+  },
+  {
+   "id": "2.1-v13",
+   "task": "2.1",
+   "type": "single",
+   "question": "A developer wants an OPEN-SOURCE, code-first, model-driven framework to build tool-using agents in a few lines of Python and then deploy them to AgentCore Runtime. Which option fits?",
+   "options": [
+    {
+     "text": "The Strands Agents SDK.",
+     "correct": true,
+     "explanation": "Strands Agents is AWS's open-source, model-driven SDK for building agents in code and deploying them to AgentCore Runtime."
+    },
+    {
+     "text": "Amazon Bedrock Agents configured in the console.",
+     "correct": false,
+     "explanation": "Bedrock Agents is a managed, configuration-driven service, not the open-source code-first SDK described."
+    },
+    {
+     "text": "Amazon Q Developer.",
+     "correct": false,
+     "explanation": "Q Developer is a coding assistant, not an agent-building runtime SDK."
+    },
+    {
+     "text": "AWS Glue.",
+     "correct": false,
+     "explanation": "Glue is an ETL service, unrelated to building agents."
+    }
+   ]
+  },
+  {
+   "id": "2.1-v14",
+   "task": "2.1",
+   "type": "single",
+   "question": "An agent's responses must be filtered for harmful content and PII regardless of which tools or knowledge bases it uses. Which approach is BEST?",
+   "options": [
+    {
+     "text": "Attach an Amazon Bedrock Guardrail to the agent.",
+     "correct": true,
+     "explanation": "A guardrail attached to the agent applies content filtering and PII handling consistently across the agent's interactions."
+    },
+    {
+     "text": "Write the safety rules into the agent's instructions.",
+     "correct": false,
+     "explanation": "Instructions are not a reliable, enforced safety control and can be bypassed."
+    },
+    {
+     "text": "Filter content inside each action group Lambda.",
+     "correct": false,
+     "explanation": "Per-tool custom filtering is inconsistent and misses responses that do not go through that Lambda."
+    },
+    {
+     "text": "Lower the agent's temperature.",
+     "correct": false,
+     "explanation": "Temperature does not filter harmful content or PII."
+    }
+   ]
+  },
+  {
+   "id": "2.2-v1",
+   "task": "2.2",
+   "type": "single",
+   "question": "An application needs synchronous, low-latency predictions for SMALL payloads with steady, predictable traffic. Which SageMaker AI option is BEST?",
+   "options": [
+    {
+     "text": "A real-time inference endpoint.",
+     "correct": true,
+     "explanation": "Real-time endpoints give persistent, low-latency synchronous inference, ideal for steady small-payload traffic."
+    },
+    {
+     "text": "Serverless Inference.",
+     "correct": false,
+     "explanation": "Serverless can cold-start and does not support GPUs, adding latency variability not wanted for steady low-latency traffic."
+    },
+    {
+     "text": "Asynchronous Inference.",
+     "correct": false,
+     "explanation": "Async adds queueing latency meant for long-running or large requests, not small fast ones."
+    },
+    {
+     "text": "Batch transform.",
+     "correct": false,
+     "explanation": "Batch transform is offline; it cannot serve synchronous requests."
+    }
+   ]
+  },
+  {
+   "id": "2.2-v2",
+   "task": "2.2",
+   "type": "single",
+   "question": "A CPU model serves intermittent traffic with long idle gaps, can tolerate occasional cold starts, and must not incur idle cost. Which option is MOST cost-effective?",
+   "options": [
+    {
+     "text": "SageMaker Serverless Inference.",
+     "correct": true,
+     "explanation": "Serverless scales (including to zero) for intermittent CPU workloads, billing only while serving."
+    },
+    {
+     "text": "An always-on real-time endpoint.",
+     "correct": false,
+     "explanation": "An always-on endpoint pays for the long idle periods."
+    },
+    {
+     "text": "Asynchronous Inference sized for peak.",
+     "correct": false,
+     "explanation": "Provisioning for peak wastes capacity for intermittent traffic."
+    },
+    {
+     "text": "Provisioned, always-on GPU instance.",
+     "correct": false,
+     "explanation": "A continuously running GPU is the most expensive and unnecessary for a CPU workload."
+    }
+   ]
+  },
+  {
+   "id": "2.2-v3",
+   "task": "2.2",
+   "type": "single",
+   "question": "Requests carry payloads up to ~1 GB and take several minutes on a GPU; responses can be delivered asynchronously. Which SageMaker option is BEST?",
+   "options": [
+    {
+     "text": "Asynchronous Inference.",
+     "correct": true,
+     "explanation": "Async supports large payloads (up to ~1 GB), long processing, and GPU instances with queued, asynchronous responses."
+    },
+    {
+     "text": "Real-time Inference.",
+     "correct": false,
+     "explanation": "Real-time endpoints cap payloads near 25 MB and target short synchronous calls, so large/long requests fail."
+    },
+    {
+     "text": "Serverless Inference.",
+     "correct": false,
+     "explanation": "Serverless does not support GPUs and has small payload limits."
+    },
+    {
+     "text": "Batch transform.",
+     "correct": false,
+     "explanation": "Batch transform is for bulk offline scoring, not on-demand per-request handling."
+    }
+   ]
+  },
+  {
+   "id": "2.2-v4",
+   "task": "2.2",
+   "type": "single",
+   "question": "A team deploys several large language models to GPU instances and wants to pack multiple models/copies onto shared accelerators, scale each independently, and scale unused ones to ZERO. Which capability fits?",
+   "options": [
+    {
+     "text": "SageMaker inference components.",
+     "correct": true,
+     "explanation": "Inference components place multiple models/copies on shared instances, allocate resources per component, scale independently, and can scale to zero."
+    },
+    {
+     "text": "A multi-model endpoint (MME).",
+     "correct": false,
+     "explanation": "MME loads many (typically smaller) models on demand behind one endpoint but is not designed for GPU-packing LLMs with independent per-model scaling and scale-to-zero."
+    },
+    {
+     "text": "One real-time endpoint per model.",
+     "correct": false,
+     "explanation": "Separate endpoints cannot pack models onto shared accelerators with independent scaling."
+    },
+    {
+     "text": "Serverless Inference.",
+     "correct": false,
+     "explanation": "Serverless does not support the GPUs these LLMs need."
+    }
+   ]
+  },
+  {
+   "id": "2.2-v5",
+   "task": "2.2",
+   "type": "single",
+   "question": "A company must host HUNDREDS of small, similar models (one per customer) behind as few endpoints as possible, loading each on demand to save cost. Which option is BEST?",
+   "options": [
+    {
+     "text": "A multi-model endpoint (MME).",
+     "correct": true,
+     "explanation": "MME hosts many models behind one endpoint, loading them on demand and sharing resources to cut cost."
+    },
+    {
+     "text": "SageMaker inference components.",
+     "correct": false,
+     "explanation": "Inference components target packing and independently scaling (often larger) models, not the classic many-small-models-on-demand pattern."
+    },
+    {
+     "text": "One dedicated endpoint per model.",
+     "correct": false,
+     "explanation": "Hundreds of endpoints multiply cost and management."
+    },
+    {
+     "text": "Batch transform per model.",
+     "correct": false,
+     "explanation": "Batch transform is offline scoring, not on-demand hosting."
+    }
+   ]
+  },
+  {
+   "id": "2.2-v6",
+   "task": "2.2",
+   "type": "single",
+   "question": "Real-time endpoint traffic swings widely between day and night, and the team wants instances added and removed automatically based on load. What should they configure?",
+   "options": [
+    {
+     "text": "Automatic scaling (for example, target tracking on invocations per instance).",
+     "correct": true,
+     "explanation": "Endpoint auto scaling adjusts instance count against a target metric, matching capacity to demand."
+    },
+    {
+     "text": "A fixed instance count sized for peak.",
+     "correct": false,
+     "explanation": "A fixed peak size wastes money at night and cannot adapt automatically."
+    },
+    {
+     "text": "Switch to batch transform during the day.",
+     "correct": false,
+     "explanation": "Batch transform is offline and cannot serve real-time daytime traffic."
+    },
+    {
+     "text": "Use a larger instance type only.",
+     "correct": false,
+     "explanation": "A bigger instance does not automatically scale with demand."
+    }
+   ]
+  },
+  {
+   "id": "2.2-v7",
+   "task": "2.2",
+   "type": "single",
+   "question": "Before promoting a new model version, the team wants to send a COPY of live production traffic to it and compare results WITHOUT affecting any users. Which capability is correct?",
+   "options": [
+    {
+     "text": "Shadow testing (shadow variants).",
+     "correct": true,
+     "explanation": "Shadow testing mirrors live traffic to a shadow variant so you validate against real requests with no impact on user-facing responses."
+    },
+    {
+     "text": "A canary deployment with deployment guardrails.",
+     "correct": false,
+     "explanation": "Canary routes a slice of REAL user traffic to the new version, so some users are affected, unlike shadow testing."
+    },
+    {
+     "text": "A blue/green switch all at once.",
+     "correct": false,
+     "explanation": "An all-at-once cutover exposes all users immediately and is not a no-impact comparison."
+    },
+    {
+     "text": "Batch transform on yesterday's data.",
+     "correct": false,
+     "explanation": "Offline scoring does not exercise the new version against live traffic."
+    }
+   ]
+  },
+  {
+   "id": "2.2-v8",
+   "task": "2.2",
+   "type": "single",
+   "question": "When updating a production endpoint, the team wants to shift a small percentage of REAL traffic first and automatically roll back if errors spike. Which capability is correct?",
+   "options": [
+    {
+     "text": "Deployment guardrails with a canary (or linear) traffic-shifting strategy and automatic rollback.",
+     "correct": true,
+     "explanation": "Deployment guardrails gradually shift live traffic, watch alarms, and roll back automatically if the new version misbehaves."
+    },
+    {
+     "text": "Shadow testing.",
+     "correct": false,
+     "explanation": "Shadow testing mirrors traffic without serving users, so it does not perform a controlled production rollout."
+    },
+    {
+     "text": "Recreate the endpoint in place.",
+     "correct": false,
+     "explanation": "An in-place replace has no gradual shift or automatic rollback and risks downtime."
+    },
+    {
+     "text": "Increase the instance count during the switch.",
+     "correct": false,
+     "explanation": "More instances does not provide controlled traffic shifting or rollback."
+    }
+   ]
+  },
+  {
+   "id": "2.2-v9",
+   "task": "2.2",
+   "type": "single",
+   "question": "A developer wants to deploy a popular open foundation model fast, with a tested container and example notebooks. Which option is BEST?",
+   "options": [
+    {
+     "text": "Deploy the model from Amazon SageMaker JumpStart.",
+     "correct": true,
+     "explanation": "JumpStart provides prebuilt, deployable models with curated containers and notebooks for fast deployment."
+    },
+    {
+     "text": "Build a custom serving container from scratch.",
+     "correct": false,
+     "explanation": "Building everything yourself is the slowest path."
+    },
+    {
+     "text": "Use batch transform to expose an endpoint.",
+     "correct": false,
+     "explanation": "Batch transform does not create an online endpoint."
+    },
+    {
+     "text": "Use AWS Glue to host the model.",
+     "correct": false,
+     "explanation": "Glue is an ETL service and cannot host a model endpoint."
+    }
+   ]
+  },
+  {
+   "id": "2.2-v10",
+   "task": "2.2",
+   "type": "single",
+   "question": "A fixed dataset already in Amazon S3 must be scored in a SINGLE offline run with no persistent endpoint, at the lowest cost. Which option is BEST?",
+   "options": [
+    {
+     "text": "A batch transform job.",
+     "correct": true,
+     "explanation": "Batch transform scores a whole S3 dataset in one offline run and releases compute afterward, with no endpoint to pay for."
+    },
+    {
+     "text": "A real-time endpoint invoked in a loop.",
+     "correct": false,
+     "explanation": "Looping over a persistent endpoint is more expensive and complex than one batch job."
+    },
+    {
+     "text": "Asynchronous Inference per record.",
+     "correct": false,
+     "explanation": "Per-record async adds overhead versus a single batch over the dataset."
+    },
+    {
+     "text": "Serverless Inference.",
+     "correct": false,
+     "explanation": "Serverless targets intermittent online requests, not bulk offline scoring."
+    }
+   ]
+  },
+  {
+   "id": "2.2-v11",
+   "task": "2.2",
+   "type": "single",
+   "question": "Profiling a model served with DJL on an 8-GPU instance shows the model fits entirely within 4 GPUs and per-instance concurrency is low. Which change BEST improves GPU utilization?",
+   "options": [
+    {
+     "text": "Use a tensor parallelism degree of 4 so two model replicas run on each 8-GPU instance.",
+     "correct": true,
+     "explanation": "Since the model fits in 4 GPUs, a tensor-parallel degree of 4 places two replicas per instance, using all 8 GPUs."
+    },
+    {
+     "text": "Use a tensor parallelism degree of 8.",
+     "correct": false,
+     "explanation": "Degree 8 serves a single replica across all GPUs, leaving half the capacity idle since the model fits in 4."
+    },
+    {
+     "text": "Add more instances and spread requests.",
+     "correct": false,
+     "explanation": "More instances does not raise per-instance utilization or concurrency."
+    },
+    {
+     "text": "Enable speculative decoding.",
+     "correct": false,
+     "explanation": "Speculative decoding reduces latency, not GPU utilization."
+    }
+   ]
+  },
+  {
+   "id": "2.2-v12",
+   "task": "2.2",
+   "type": "single",
+   "question": "Logs show the real maximum sequence length is about 10x smaller than the configured value and concurrency per GPU is low on a DJL-served model. Which change BEST increases throughput per GPU?",
+   "options": [
+    {
+     "text": "Reduce the configured maximum sequence length to allow a larger rolling batch size.",
+     "correct": true,
+     "explanation": "Lowering the max sequence length frees memory so more requests fit in each rolling batch, increasing throughput and concurrency."
+    },
+    {
+     "text": "Increase the maximum sequence length.",
+     "correct": false,
+     "explanation": "A larger max sequence length reserves more memory per request and reduces batch size."
+    },
+    {
+     "text": "Lower the rolling batch size.",
+     "correct": false,
+     "explanation": "A smaller batch reduces throughput."
+    },
+    {
+     "text": "Enable speculative decoding.",
+     "correct": false,
+     "explanation": "Speculative decoding targets latency, not batch-size-driven throughput."
+    }
+   ]
+  },
+  {
+   "id": "2.3-v1",
+   "task": "2.3",
+   "type": "single",
+   "question": "An enterprise must upgrade many applications from an old Java version to a current LTS release, automating the repetitive code changes at scale. Which Amazon Q Developer capability is BEST?",
+   "options": [
+    {
+     "text": "Amazon Q Developer code transformation.",
+     "correct": true,
+     "explanation": "Code transformation automates large-scale upgrades such as moving codebases to a newer Java version."
+    },
+    {
+     "text": "Amazon Q Developer inline code suggestions.",
+     "correct": false,
+     "explanation": "Inline suggestions speed typing in the editor but do not perform an automated, repository-wide upgrade."
+    },
+    {
+     "text": "Manually editing each project.",
+     "correct": false,
+     "explanation": "Manual edits across many applications are slow and error-prone, which automation avoids."
+    },
+    {
+     "text": "Amazon Macie.",
+     "correct": false,
+     "explanation": "Macie classifies sensitive data and is unrelated to code upgrades."
+    }
+   ]
+  },
+  {
+   "id": "2.3-v2",
+   "task": "2.3",
+   "type": "single",
+   "question": "A team wants an assistant that takes a natural-language feature request, plans it, and implements the change across MULTIPLE files. Which Amazon Q Developer capability fits?",
+   "options": [
+    {
+     "text": "The Amazon Q Developer feature-development agent (/dev).",
+     "correct": true,
+     "explanation": "The /dev agent analyzes the codebase, proposes a plan, and applies coordinated multi-file changes."
+    },
+    {
+     "text": "Single-line inline completion.",
+     "correct": false,
+     "explanation": "Inline completion helps at the cursor but cannot plan and implement a multi-file feature."
+    },
+    {
+     "text": "Amazon QuickSight Q.",
+     "correct": false,
+     "explanation": "QuickSight Q answers questions over BI data, not multi-file code changes."
+    },
+    {
+     "text": "Amazon Comprehend.",
+     "correct": false,
+     "explanation": "Comprehend is an NLP service, not a coding agent."
+    }
+   ]
+  },
+  {
+   "id": "2.3-v3",
+   "task": "2.3",
+   "type": "single",
+   "question": "Developers want their assistant to scan SOURCE CODE for vulnerabilities and suggest fixes inside the IDE. Which option is correct?",
+   "options": [
+    {
+     "text": "Amazon Q Developer security scanning.",
+     "correct": true,
+     "explanation": "Q Developer scans code for vulnerabilities and suggests remediations in the developer workflow."
+    },
+    {
+     "text": "Amazon Inspector.",
+     "correct": false,
+     "explanation": "Inspector assesses workloads and software for vulnerabilities operationally, not in-IDE source-code scanning for developers."
+    },
+    {
+     "text": "Amazon GuardDuty.",
+     "correct": false,
+     "explanation": "GuardDuty detects account/workload threats, not source-code vulnerabilities."
+    },
+    {
+     "text": "Amazon Macie.",
+     "correct": false,
+     "explanation": "Macie classifies sensitive data, not code vulnerabilities."
+    }
+   ]
+  },
+  {
+   "id": "2.3-v4",
+   "task": "2.3",
+   "type": "single",
+   "question": "To raise coverage quickly, a team wants to automatically GENERATE unit tests for existing functions. Which option is BEST?",
+   "options": [
+    {
+     "text": "Amazon Q Developer unit test generation.",
+     "correct": true,
+     "explanation": "Q Developer generates unit tests for existing code with minimal manual effort."
+    },
+    {
+     "text": "AWS CodeBuild.",
+     "correct": false,
+     "explanation": "CodeBuild runs builds/tests but does not author tests."
+    },
+    {
+     "text": "Single-line inline completion only.",
+     "correct": false,
+     "explanation": "Inline completion does not systematically generate a test suite for existing functions."
+    },
+    {
+     "text": "Amazon QuickSight.",
+     "correct": false,
+     "explanation": "QuickSight is for dashboards, not test generation."
+    }
+   ]
+  },
+  {
+   "id": "2.3-v5",
+   "task": "2.3",
+   "type": "single",
+   "question": "A team wants automated test generation and quality checks to run CONTINUOUSLY as code is merged, not ad hoc. Which approach is BEST?",
+   "options": [
+    {
+     "text": "Integrate Amazon Q Developer automated test generation into the CI/CD pipeline.",
+     "correct": true,
+     "explanation": "Embedding Q Developer test generation in CI/CD continuously validates changes and catches defects early."
+    },
+    {
+     "text": "Run Amazon Q Developer only manually in the IDE when remembered.",
+     "correct": false,
+     "explanation": "Ad hoc IDE use is not continuous and misses merges."
+    },
+    {
+     "text": "Hold periodic manual review cycles instead.",
+     "correct": false,
+     "explanation": "Manual cycles are slow and not continuous."
+    },
+    {
+     "text": "Add Amazon Inspector to the pipeline for unit tests.",
+     "correct": false,
+     "explanation": "Inspector finds vulnerabilities; it does not generate unit tests."
+    }
+   ]
+  },
+  {
+   "id": "2.4-v1",
+   "task": "2.4",
+   "type": "single",
+   "question": "A team must retain the FULL prompt and response content of every Bedrock model call for troubleshooting and audit, with the least custom code. Which capability is correct?",
+   "options": [
+    {
+     "text": "Amazon Bedrock model invocation logging.",
+     "correct": true,
+     "explanation": "Invocation logging records full prompts, responses, and metadata to S3 and/or CloudWatch with no custom instrumentation."
+    },
+    {
+     "text": "AWS CloudTrail.",
+     "correct": false,
+     "explanation": "CloudTrail records API metadata, not the full prompt/response content."
+    },
+    {
+     "text": "Amazon CloudWatch metrics.",
+     "correct": false,
+     "explanation": "Metrics are numeric aggregates, not request/response content."
+    },
+    {
+     "text": "AWS X-Ray.",
+     "correct": false,
+     "explanation": "X-Ray traces request flow and timing, not full model content."
+    }
+   ]
+  },
+  {
+   "id": "2.4-v2",
+   "task": "2.4",
+   "type": "single",
+   "question": "An auditor needs to know WHICH IAM principal called WHICH Bedrock API and WHEN, across the account. Which service provides this?",
+   "options": [
+    {
+     "text": "AWS CloudTrail.",
+     "correct": true,
+     "explanation": "CloudTrail records API calls with principal, action, time, and source, the audit trail of who did what."
+    },
+    {
+     "text": "Amazon Bedrock model invocation logging.",
+     "correct": false,
+     "explanation": "Invocation logging captures model prompt/response content, not a full account-wide API caller audit trail."
+    },
+    {
+     "text": "Amazon CloudWatch dashboards.",
+     "correct": false,
+     "explanation": "Dashboards visualize metrics, not per-call caller identity."
+    },
+    {
+     "text": "AWS Config.",
+     "correct": false,
+     "explanation": "Config tracks resource configuration compliance, not API caller activity."
+    }
+   ]
+  },
+  {
+   "id": "2.4-v3",
+   "task": "2.4",
+   "type": "single",
+   "question": "A team must identify and troubleshoot per-DOCUMENT failures during knowledge base ingestion (ingested, ignored, or failed). Which solution is correct?",
+   "options": [
+    {
+     "text": "Configure knowledge base logging to CloudWatch Logs and query with Logs Insights.",
+     "correct": true,
+     "explanation": "Knowledge base logging records per-file ingestion status, which Logs Insights can query for failures."
+    },
+    {
+     "text": "Enable Bedrock model invocation logging.",
+     "correct": false,
+     "explanation": "Invocation logging captures model calls, not the document ingestion process."
+    },
+    {
+     "text": "Use AWS CloudTrail.",
+     "correct": false,
+     "explanation": "CloudTrail records API calls, not document-level ingestion status."
+    },
+    {
+     "text": "Enable CloudWatch Application Signals.",
+     "correct": false,
+     "explanation": "Application Signals monitors application performance, not knowledge base ingestion."
+    }
+   ]
+  },
+  {
+   "id": "2.4-v4",
+   "task": "2.4",
+   "type": "single",
+   "question": "A request flows through API Gateway, several Lambdas, a knowledge base, and Bedrock, and the team must find WHICH component causes high end-to-end latency. Which service is BEST?",
+   "options": [
+    {
+     "text": "AWS X-Ray.",
+     "correct": true,
+     "explanation": "X-Ray traces requests across components and shows segment timings that pinpoint the bottleneck."
+    },
+    {
+     "text": "Amazon CloudWatch alarms on total latency.",
+     "correct": false,
+     "explanation": "Alarms detect that latency is high but do not localize which component is responsible."
+    },
+    {
+     "text": "Bedrock model invocation logging.",
+     "correct": false,
+     "explanation": "Invocation logging captures model content, not cross-service timing."
+    },
+    {
+     "text": "Amazon Macie.",
+     "correct": false,
+     "explanation": "Macie classifies data and has no tracing capability."
+    }
+   ]
+  },
+  {
+   "id": "2.4-v5",
+   "task": "2.4",
+   "type": "single",
+   "question": "Invocation logs are stored in CloudWatch Logs, and an engineer must interactively query them to find and aggregate error patterns. Which tool is BEST?",
+   "options": [
+    {
+     "text": "Amazon CloudWatch Logs Insights.",
+     "correct": true,
+     "explanation": "Logs Insights provides an interactive query language to search and aggregate the CloudWatch log data."
+    },
+    {
+     "text": "AWS CloudTrail Lake.",
+     "correct": false,
+     "explanation": "CloudTrail Lake queries CloudTrail API events, not arbitrary invocation logs already in CloudWatch Logs."
+    },
+    {
+     "text": "Amazon Athena with no setup.",
+     "correct": false,
+     "explanation": "Athena would require exporting and cataloging the data first; Logs Insights queries the logs directly."
+    },
+    {
+     "text": "Amazon QuickSight Q.",
+     "correct": false,
+     "explanation": "QuickSight Q answers over prepared BI datasets, not ad hoc CloudWatch log querying."
+    }
+   ]
+  },
+  {
+   "id": "2.4-v6",
+   "task": "2.4",
+   "type": "single",
+   "question": "A model on a SageMaker real-time endpoint must be continuously monitored for DATA DRIFT against a baseline, with automated alerts. Which capability is correct?",
+   "options": [
+    {
+     "text": "Amazon SageMaker Model Monitor.",
+     "correct": true,
+     "explanation": "Model Monitor continuously checks a deployed endpoint for data quality and drift against a baseline and can alert."
+    },
+    {
+     "text": "Amazon SageMaker Clarify run once at training time.",
+     "correct": false,
+     "explanation": "A one-time Clarify analysis measures bias/explainability but is not continuous endpoint drift monitoring."
+    },
+    {
+     "text": "CloudWatch alarms on CPU only.",
+     "correct": false,
+     "explanation": "Infrastructure metrics do not detect data drift."
+    },
+    {
+     "text": "Amazon Bedrock Guardrails.",
+     "correct": false,
+     "explanation": "Guardrails filter content; they do not monitor endpoint data drift."
+    }
+   ]
+  },
+  {
+   "id": "2.4-v7",
+   "task": "2.4",
+   "type": "single",
+   "question": "A finance team must ATTRIBUTE Bedrock usage and cost to specific applications and teams that SHARE the same models. Which approach is purpose-built for this?",
+   "options": [
+    {
+     "text": "Use Amazon Bedrock application inference profiles with cost allocation tags.",
+     "correct": true,
+     "explanation": "Application inference profiles tag and route invocations so usage and cost can be attributed per application or team."
+    },
+    {
+     "text": "Use AWS Cost Explorer without any tagging.",
+     "correct": false,
+     "explanation": "Cost Explorer alone cannot split a shared model's spend across applications without attribution tags."
+    },
+    {
+     "text": "Use AWS CloudTrail.",
+     "correct": false,
+     "explanation": "CloudTrail records who called the API, not per-application cost attribution."
+    },
+    {
+     "text": "Use model invocation logging.",
+     "correct": false,
+     "explanation": "Invocation logging stores content, not cost attribution."
+    }
+   ]
+  },
+  {
+   "id": "2.4-v8",
+   "task": "2.4",
+   "type": "single",
+   "question": "After launch, a team wants ongoing assurance of a generative feature's quality, catching regressions as prompts and models change. Which practice is MOST effective?",
+   "options": [
+    {
+     "text": "Log responses and run periodic automated evaluations on sampled production traffic, alerting on regressions.",
+     "correct": true,
+     "explanation": "Response logging plus scheduled automated evaluation on samples gives continuous, data-driven quality monitoring."
+    },
+    {
+     "text": "Monitor only CPU and memory.",
+     "correct": false,
+     "explanation": "Infrastructure metrics do not reveal generation-quality regressions."
+    },
+    {
+     "text": "Wait for user complaints.",
+     "correct": false,
+     "explanation": "Relying on complaints is reactive and lets defects reach users."
+    },
+    {
+     "text": "Run one pre-launch test and never re-check.",
+     "correct": false,
+     "explanation": "A one-time test misses regressions introduced by later changes."
+    }
+   ]
+  },
+  {
+   "id": "3.1-v1",
+   "task": "3.1",
+   "type": "single",
+   "question": "A mobile app's end users sign in and must then receive scoped, TEMPORARY AWS credentials to call Bedrock, with no AWS keys embedded in the app. Which approach is correct?",
+   "options": [
+    {
+     "text": "Use an Amazon Cognito identity pool to exchange the sign-in for temporary, scoped AWS credentials.",
+     "correct": true,
+     "explanation": "Identity pools federate authenticated users to temporary AWS credentials tied to an IAM role, with no embedded keys."
+    },
+    {
+     "text": "Use an Amazon Cognito user pool by itself.",
+     "correct": false,
+     "explanation": "A user pool authenticates users but does not itself vend AWS credentials; the identity pool provides AWS credentials."
+    },
+    {
+     "text": "Embed a shared IAM access key in the app.",
+     "correct": false,
+     "explanation": "Embedding long-lived keys in a distributed app is a serious security risk."
+    },
+    {
+     "text": "Create one IAM user per end user.",
+     "correct": false,
+     "explanation": "IAM users issue long-lived keys and do not scale or provide temporary access."
+    }
+   ]
+  },
+  {
+   "id": "3.1-v2",
+   "task": "3.1",
+   "type": "single",
+   "question": "INTERNAL employees must authenticate through the corporate SAML identity provider to access Bedrock with temporary credentials (workforce SSO). Which solution is BEST?",
+   "options": [
+    {
+     "text": "AWS IAM Identity Center with SAML federation to the corporate IdP.",
+     "correct": true,
+     "explanation": "IAM Identity Center is the workforce SSO service that federates corporate identities to temporary AWS access."
+    },
+    {
+     "text": "An Amazon Cognito identity pool.",
+     "correct": false,
+     "explanation": "Cognito targets application/customer identities; workforce SSO via the corporate IdP is IAM Identity Center."
+    },
+    {
+     "text": "IAM users for each employee.",
+     "correct": false,
+     "explanation": "IAM users rely on long-lived keys and do not integrate with the corporate IdP."
+    },
+    {
+     "text": "Access keys distributed to employees.",
+     "correct": false,
+     "explanation": "Distributing long-lived keys is insecure and unmanageable."
+    }
+   ]
+  },
+  {
+   "id": "3.1-v3",
+   "task": "3.1",
+   "type": "single",
+   "question": "A regulated company must call Bedrock from its VPC WITHOUT traffic traversing the public internet. Which solution is correct?",
+   "options": [
+    {
+     "text": "Create VPC interface endpoints (AWS PrivateLink) for Amazon Bedrock.",
+     "correct": true,
+     "explanation": "Interface endpoints via PrivateLink keep traffic to Bedrock on the AWS network."
+    },
+    {
+     "text": "Route Bedrock calls through a NAT gateway.",
+     "correct": false,
+     "explanation": "A NAT gateway still sends traffic over the public internet."
+    },
+    {
+     "text": "Use an internet gateway with TLS.",
+     "correct": false,
+     "explanation": "TLS encrypts traffic but it still traverses the public internet."
+    },
+    {
+     "text": "Set up VPC peering.",
+     "correct": false,
+     "explanation": "VPC peering connects VPCs to each other, not your VPC privately to the Bedrock service."
+    }
+   ]
+  },
+  {
+   "id": "3.1-v4",
+   "task": "3.1",
+   "type": "single",
+   "question": "An application in Account A must call Bedrock resources governed by Account B using temporary credentials and no shared long-lived keys. Which mechanism is correct?",
+   "options": [
+    {
+     "text": "Create an IAM role in Account B and have Account A assume it via AWS STS AssumeRole.",
+     "correct": true,
+     "explanation": "Cross-account role assumption provides scoped, temporary credentials without sharing long-lived keys."
+    },
+    {
+     "text": "Share Account B's IAM access keys with Account A.",
+     "correct": false,
+     "explanation": "Sharing long-lived keys is insecure and unmanageable."
+    },
+    {
+     "text": "Make the Bedrock resources public.",
+     "correct": false,
+     "explanation": "Public access removes the required access control."
+    },
+    {
+     "text": "Use the same root user across both accounts.",
+     "correct": false,
+     "explanation": "Sharing root credentials is a severe security violation."
+    }
+   ]
+  },
+  {
+   "id": "3.1-v5",
+   "task": "3.1",
+   "type": "single",
+   "question": "An agent's Lambda must use a third-party API key that has to be stored securely WITH automatic rotation and fine-grained access. Which service is BEST?",
+   "options": [
+    {
+     "text": "AWS Secrets Manager.",
+     "correct": true,
+     "explanation": "Secrets Manager stores credentials with IAM-controlled access and supports built-in automatic rotation."
+    },
+    {
+     "text": "AWS Systems Manager Parameter Store SecureString.",
+     "correct": false,
+     "explanation": "Parameter Store can hold encrypted values but does not provide built-in managed rotation for arbitrary third-party secrets the way Secrets Manager does."
+    },
+    {
+     "text": "A plaintext environment variable.",
+     "correct": false,
+     "explanation": "Plaintext secrets are insecure and cannot be rotated safely."
+    },
+    {
+     "text": "A hard-coded constant in the function.",
+     "correct": false,
+     "explanation": "Hard-coded secrets cannot be rotated and risk exposure."
+    }
+   ]
+  },
+  {
+   "id": "3.1-v6",
+   "task": "3.1",
+   "type": "single",
+   "question": "Security policy requires that a specific IAM role be able to invoke ONLY one approved foundation model in Bedrock. How is this BEST enforced?",
+   "options": [
+    {
+     "text": "Write a least-privilege IAM policy that allows invoke actions only on the approved model's resource ARN.",
+     "correct": true,
+     "explanation": "Scoping the policy to the specific model ARN technically restricts the role to that model."
+    },
+    {
+     "text": "Apply the bedrock:GuardrailIdentifier condition key.",
+     "correct": false,
+     "explanation": "That condition enforces that a guardrail is applied; it does not restrict which model the role may invoke."
+    },
+    {
+     "text": "Allow all models and tell developers to use only the approved one.",
+     "correct": false,
+     "explanation": "A verbal rule is not a technical control."
+    },
+    {
+     "text": "Choose the model only in application code.",
+     "correct": false,
+     "explanation": "Application-side selection is not an access control and can be bypassed."
+    }
+   ]
+  },
+  {
+   "id": "3.1-v7",
+   "task": "3.1",
+   "type": "single",
+   "question": "A company must encrypt Bedrock-related data at rest using keys it can CONTROL, ROTATE, and AUDIT. Which approach is correct?",
+   "options": [
+    {
+     "text": "Encrypt with an AWS KMS customer managed key (CMK).",
+     "correct": true,
+     "explanation": "A customer managed key gives control over key policy and rotation, and CloudTrail audits its use."
+    },
+    {
+     "text": "Rely on the default AWS owned key.",
+     "correct": false,
+     "explanation": "AWS owned keys encrypt data but give the customer no control, rotation policy, or usage auditing."
+    },
+    {
+     "text": "Store the data unencrypted for simplicity.",
+     "correct": false,
+     "explanation": "Unencrypted data fails the requirement."
+    },
+    {
+     "text": "Use a client-side passphrase hard-coded in the app.",
+     "correct": false,
+     "explanation": "A hard-coded passphrase is insecure and not an auditable managed key."
+    }
+   ]
+  },
+  {
+   "id": "3.1-v8",
+   "task": "3.1",
+   "type": "single",
+   "question": "A compliance team must ensure customer prompts are processed only within an approved Region and are NOT used to train the base models. Which statement and action are correct?",
+   "options": [
+    {
+     "text": "Use Bedrock in the approved Region; it processes the data in that Region and does not use your prompts/outputs to train the base models.",
+     "correct": true,
+     "explanation": "Bedrock keeps inference data in the Region you call and does not use customer inputs/outputs to train base models."
+    },
+    {
+     "text": "File a support ticket to opt out, or your data trains the models by default.",
+     "correct": false,
+     "explanation": "No opt-out is required; Bedrock does not use your data to train base models."
+    },
+    {
+     "text": "Accept that data may be processed globally.",
+     "correct": false,
+     "explanation": "Inference data is processed in the Region you invoke, not globally."
+    },
+    {
+     "text": "Self-host the model, since only that prevents base-model training on your data.",
+     "correct": false,
+     "explanation": "Using Bedrock already prevents your data from training base models; self-hosting is unnecessary for that guarantee."
+    }
+   ]
+  },
+  {
+   "id": "3.2-v1",
+   "task": "3.2",
+   "type": "single",
+   "question": "A team must filter harmful content (hate, insults, violence, sexual, misconduct) in BOTH prompts and responses, with adjustable strictness PER category. Which Guardrails feature is correct?",
+   "options": [
+    {
+     "text": "Content filters with configurable strength per harmful category.",
+     "correct": true,
+     "explanation": "Content filters detect and block harmful categories in input and output with per-category strength settings."
+    },
+    {
+     "text": "Denied topics.",
+     "correct": false,
+     "explanation": "Denied topics block specific subjects you define, not the built-in harmful-content categories."
+    },
+    {
+     "text": "Word filters.",
+     "correct": false,
+     "explanation": "Word filters block specific words/phrases, not graded harmful-content categories."
+    },
+    {
+     "text": "Stop sequences.",
+     "correct": false,
+     "explanation": "Stop sequences end generation; they do not classify harmful content."
+    }
+   ]
+  },
+  {
+   "id": "3.2-v2",
+   "task": "3.2",
+   "type": "single",
+   "question": "A banking assistant must refuse a specific prohibited SUBJECT (individualized investment advice) even when users rephrase it in new ways. Which Guardrails feature is BEST?",
+   "options": [
+    {
+     "text": "Denied topics, defined with a description and examples.",
+     "correct": true,
+     "explanation": "Denied topics block a subject by semantic description and examples, catching varied phrasings."
+    },
+    {
+     "text": "Word filters listing banned terms.",
+     "correct": false,
+     "explanation": "A keyword list misses rephrasings and is brittle for a whole subject."
+    },
+    {
+     "text": "Content filters.",
+     "correct": false,
+     "explanation": "Content filters target harmful categories, not an arbitrary business subject."
+    },
+    {
+     "text": "The PII filter.",
+     "correct": false,
+     "explanation": "The PII filter handles personal data, not topic restriction."
+    }
+   ]
+  },
+  {
+   "id": "3.2-v3",
+   "task": "3.2",
+   "type": "single",
+   "question": "An assistant must ensure PII in model RESPONSES is masked or blocked before reaching users, as a managed guardrail control. Which feature is correct?",
+   "options": [
+    {
+     "text": "The Guardrails sensitive information (PII) filter.",
+     "correct": true,
+     "explanation": "The PII filter detects and masks or blocks personal information in inputs and outputs."
+    },
+    {
+     "text": "Run Amazon Comprehend on each response in custom code.",
+     "correct": false,
+     "explanation": "Comprehend can detect PII but is a separate custom step, not the managed in-guardrail control the scenario asks for."
+    },
+    {
+     "text": "Denied topics.",
+     "correct": false,
+     "explanation": "Denied topics block subjects, not PII entities."
+    },
+    {
+     "text": "Content filters.",
+     "correct": false,
+     "explanation": "Content filters handle harmful categories, not PII masking."
+    }
+   ]
+  },
+  {
+   "id": "3.2-v4",
+   "task": "3.2",
+   "type": "single",
+   "question": "A public chatbot faces users trying to override its instructions and jailbreak it. Which Guardrails capability specifically detects these attempts?",
+   "options": [
+    {
+     "text": "The prompt attack filter.",
+     "correct": true,
+     "explanation": "The prompt attack filter flags prompt injection and jailbreak inputs so they can be blocked."
+    },
+    {
+     "text": "Denied topics.",
+     "correct": false,
+     "explanation": "Denied topics block subjects, not injection attempts."
+    },
+    {
+     "text": "Content filters for hate/violence.",
+     "correct": false,
+     "explanation": "Those categories do not target instruction-override attacks."
+    },
+    {
+     "text": "Lowering the temperature.",
+     "correct": false,
+     "explanation": "Temperature does not detect prompt attacks."
+    }
+   ]
+  },
+  {
+   "id": "3.2-v5",
+   "task": "3.2",
+   "type": "single",
+   "question": "A brand must block an EXACT list of competitor names and specific profane terms from outputs. Which Guardrails feature is the BEST fit?",
+   "options": [
+    {
+     "text": "Word filters (a custom word/phrase list plus managed profanity).",
+     "correct": true,
+     "explanation": "Word filters block specific, exact terms such as competitor names and profanity."
+    },
+    {
+     "text": "Denied topics.",
+     "correct": false,
+     "explanation": "Denied topics target whole semantic subjects, which is heavier than blocking an exact word list."
+    },
+    {
+     "text": "Content filters.",
+     "correct": false,
+     "explanation": "Content filters address harmful categories, not a specific custom term list."
+    },
+    {
+     "text": "The PII filter.",
+     "correct": false,
+     "explanation": "The PII filter handles personal data, not competitor names."
+    }
+   ]
+  },
+  {
+   "id": "3.2-v6",
+   "task": "3.2",
+   "type": "single",
+   "question": "In a RAG assistant, the guardrail itself should block responses NOT supported by the retrieved source or off-topic from the query, using a tunable threshold. Which capability fits?",
+   "options": [
+    {
+     "text": "The contextual grounding and relevance checks.",
+     "correct": true,
+     "explanation": "These checks score grounding in the source and relevance to the query and can block low-scoring responses at a configured threshold."
+    },
+    {
+     "text": "Denied topics.",
+     "correct": false,
+     "explanation": "Denied topics block subjects, not ungrounded answers within an allowed subject."
+    },
+    {
+     "text": "Content filters.",
+     "correct": false,
+     "explanation": "Content filters target harmful content, not grounding."
+    },
+    {
+     "text": "Word filters.",
+     "correct": false,
+     "explanation": "Word filters block specific terms, not ungrounded responses."
+    }
+   ]
+  },
+  {
+   "id": "3.2-v7",
+   "task": "3.2",
+   "type": "single",
+   "question": "A self-managed pipeline calls a model hosted OUTSIDE Bedrock but wants to apply the same Bedrock guardrail policy to arbitrary text at chosen points. Which capability enables this?",
+   "options": [
+    {
+     "text": "The ApplyGuardrail API.",
+     "correct": true,
+     "explanation": "ApplyGuardrail evaluates input/output text against a guardrail independently of a Bedrock model call, covering external models and arbitrary points."
+    },
+    {
+     "text": "Inline guardrails only on Bedrock InvokeModel.",
+     "correct": false,
+     "explanation": "Inline-only guardrails cannot cover text from a non-Bedrock model or arbitrary pipeline steps."
+    },
+    {
+     "text": "Defining denied topics in the guardrail.",
+     "correct": false,
+     "explanation": "Denied topics is a policy type, not the independent evaluation API."
+    },
+    {
+     "text": "Provisioned Throughput.",
+     "correct": false,
+     "explanation": "Provisioned Throughput is a capacity feature, unrelated to guardrail evaluation."
+    }
+   ]
+  },
+  {
+   "id": "3.2-v8",
+   "task": "3.2",
+   "type": "single",
+   "question": "A regulated insurer needs strong assurance that policy answers conform to its written rules, with VERIFIABLE logical checks rather than only probabilistic filtering. Which newer Guardrails capability fits?",
+   "options": [
+    {
+     "text": "Automated Reasoning checks.",
+     "correct": true,
+     "explanation": "Automated Reasoning checks use formal, logic-based verification against an encoded policy to validate responses."
+    },
+    {
+     "text": "The contextual grounding check.",
+     "correct": false,
+     "explanation": "Grounding checks whether a response is supported by provided source text, not formal verification against encoded policy rules."
+    },
+    {
+     "text": "Content filters.",
+     "correct": false,
+     "explanation": "Content filters handle harmful content, not policy conformance verification."
+    },
+    {
+     "text": "Lowering the temperature.",
+     "correct": false,
+     "explanation": "Temperature does not verify outputs against policy."
+    }
+   ]
+  },
+  {
+   "id": "3.2-v9",
+   "task": "3.2",
+   "type": "single",
+   "question": "Governance requires that EVERY InvokeModel and Converse call from many IAM roles apply a specific guardrail, enforced as efficiently as possible. Which approach is BEST?",
+   "options": [
+    {
+     "text": "Add an IAM policy with the bedrock:GuardrailIdentifier condition key to all roles that access Bedrock.",
+     "correct": true,
+     "explanation": "The condition key centrally and efficiently enforces that the guardrail is applied across all relevant API calls."
+    },
+    {
+     "text": "Route all calls through a Lambda proxy that injects the guardrail.",
+     "correct": false,
+     "explanation": "A proxy is a bottleneck and custom code to maintain, less efficient than the IAM condition."
+    },
+    {
+     "text": "Store the guardrail ID in Parameter Store and fetch it per call.",
+     "correct": false,
+     "explanation": "Per-call retrieval adds latency and maintenance."
+    },
+    {
+     "text": "Manually set the guardrail in each application's config.",
+     "correct": false,
+     "explanation": "Per-app configuration is not centrally enforced and is easy to miss."
+    }
+   ]
+  },
+  {
+   "id": "3.3-v1",
+   "task": "3.3",
+   "type": "single",
+   "question": "Compliance records must be stored so they CANNOT be altered or deleted for a mandated period, even by administrators or the root user. Which configuration is correct?",
+   "options": [
+    {
+     "text": "Amazon S3 Object Lock in compliance mode for the retention period.",
+     "correct": true,
+     "explanation": "Compliance mode enforces WORM immutability that no one, including root, can override until retention expires."
+    },
+    {
+     "text": "Amazon S3 Object Lock in governance mode.",
+     "correct": false,
+     "explanation": "Governance mode can be overridden by users with special permissions, so it does not guarantee immutability against administrators."
+    },
+    {
+     "text": "S3 versioning alone.",
+     "correct": false,
+     "explanation": "Versioning preserves versions but does not prevent deletion or enforce retention."
+    },
+    {
+     "text": "A bucket policy that denies deletes.",
+     "correct": false,
+     "explanation": "A bucket policy can be changed by administrators, so it is not immutable retention."
+    }
+   ]
+  },
+  {
+   "id": "3.3-v2",
+   "task": "3.3",
+   "type": "single",
+   "question": "An auditor must determine which IAM principals called which Bedrock APIs and when. Which service provides this trail?",
+   "options": [
+    {
+     "text": "AWS CloudTrail.",
+     "correct": true,
+     "explanation": "CloudTrail records API calls with principal, action, and time."
+    },
+    {
+     "text": "Bedrock model invocation logging.",
+     "correct": false,
+     "explanation": "Invocation logging captures prompt/response content, not the account-wide API caller audit trail."
+    },
+    {
+     "text": "Amazon CloudWatch metrics.",
+     "correct": false,
+     "explanation": "Metrics are numeric aggregates, not caller identity."
+    },
+    {
+     "text": "AWS Config.",
+     "correct": false,
+     "explanation": "Config tracks resource configuration, not API caller activity."
+    }
+   ]
+  },
+  {
+   "id": "3.3-v3",
+   "task": "3.3",
+   "type": "single",
+   "question": "For regulatory reconstruction, a company must retain the ACTUAL prompt and response content of every Bedrock call in immutable storage. Which combination is correct?",
+   "options": [
+    {
+     "text": "Enable Bedrock model invocation logging to S3 and apply S3 Object Lock for the retention period.",
+     "correct": true,
+     "explanation": "Invocation logging captures full content, and Object Lock makes the stored logs immutable for retention."
+    },
+    {
+     "text": "Enable AWS CloudTrail only.",
+     "correct": false,
+     "explanation": "CloudTrail captures API metadata, not the full prompt/response content."
+    },
+    {
+     "text": "Print prompts to the application console.",
+     "correct": false,
+     "explanation": "Console output is not durable, complete, or immutable."
+    },
+    {
+     "text": "Rely on CloudWatch metrics.",
+     "correct": false,
+     "explanation": "Metrics do not store prompt or response text."
+    }
+   ]
+  },
+  {
+   "id": "3.3-v4",
+   "task": "3.3",
+   "type": "single",
+   "question": "A company wants to keep chat transcripts for analytics but is prohibited from RETAINING PII. What is the BEST approach before storage?",
+   "options": [
+    {
+     "text": "Redact PII with Amazon Comprehend, then store the sanitized transcripts.",
+     "correct": true,
+     "explanation": "Detecting and redacting PII before storage keeps useful analytics data while complying with the no-PII rule."
+    },
+    {
+     "text": "Store the raw transcripts unchanged.",
+     "correct": false,
+     "explanation": "Storing raw PII violates the requirement."
+    },
+    {
+     "text": "Encrypt the bucket and keep all PII.",
+     "correct": false,
+     "explanation": "Encryption protects data at rest but does not satisfy a rule against retaining PII at all."
+    },
+    {
+     "text": "Lower the model temperature.",
+     "correct": false,
+     "explanation": "Temperature does not remove PII from stored text."
+    }
+   ]
+  },
+  {
+   "id": "3.3-v5",
+   "task": "3.3",
+   "type": "single",
+   "question": "Stored embeddings and invocation logs contain sensitive data, and the security team must CONTROL and AUDIT the encryption keys. Which approach is BEST?",
+   "options": [
+    {
+     "text": "Encrypt with AWS KMS customer managed keys and audit usage via key policies and CloudTrail.",
+     "correct": true,
+     "explanation": "Customer managed keys give control and rotation, and CloudTrail records key usage for auditing."
+    },
+    {
+     "text": "Leave the data unencrypted for easy access.",
+     "correct": false,
+     "explanation": "Unencrypted sensitive data fails the requirement."
+    },
+    {
+     "text": "Use one shared password stored in code.",
+     "correct": false,
+     "explanation": "A hard-coded shared secret is insecure and not auditable."
+    },
+    {
+     "text": "Make the storage public so keys are unnecessary.",
+     "correct": false,
+     "explanation": "Public storage exposes the data and is the opposite of the requirement."
+    }
+   ]
+  },
+  {
+   "id": "3.3-v6",
+   "task": "3.3",
+   "type": "single",
+   "question": "A user invokes their right to erasure. Their documents were ingested into a knowledge base whose embeddings live in a vector store. What must you do to FULLY remove their data?",
+   "options": [
+    {
+     "text": "Delete the source documents AND remove/re-sync them from the knowledge base so the corresponding vector embeddings are deleted.",
+     "correct": true,
+     "explanation": "Embeddings persist in the vector store until the knowledge base is updated, so both the source and the ingested vectors must be removed."
+    },
+    {
+     "text": "Delete only the source files from Amazon S3.",
+     "correct": false,
+     "explanation": "Deleting the source leaves the already-ingested embeddings in the vector store, so the data is not fully removed."
+    },
+    {
+     "text": "Delete only the CloudWatch logs.",
+     "correct": false,
+     "explanation": "Logs are unrelated to the embeddings retained in the vector store."
+    },
+    {
+     "text": "Rely on S3 Object Lock to expire the data.",
+     "correct": false,
+     "explanation": "Object Lock prevents deletion during retention, which is the opposite of fulfilling an erasure request."
+    }
+   ]
+  }
+ ]
+}

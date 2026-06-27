@@ -1,0 +1,15 @@
+# Saved quiz attempts are personal — keep the folder, ignore the CSVs
+results/*.csv
+
+# Python
+__pycache__/
+*.py[cod]
+
+# macOS
+.DS_Store
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Personal publishing notes — kept local, not uploaded
+PUBLISHING.md

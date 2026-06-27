@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AWS AIP-C01 Practice Exam</title>
+<style>
+  :root{
+    --navy:#232f3e; --navy2:#2e3c4e; --orange:#ff9900; --ink:#16191f; --muted:#687078;
+    --line:#e3e6ea; --bg:#f4f6f8; --card:#fff; --green:#1a7f37; --greenbg:#e9f6ec;
+    --red:#c4320a; --redbg:#fdece7; --blue:#0972d3;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       color:var(--ink);background:var(--bg)}
+  a{color:var(--blue)}
+  header{background:var(--navy);color:#fff;padding:14px 20px;display:flex;align-items:center;gap:14px;
+         position:sticky;top:0;z-index:5}
+  header .brand{font-weight:700}
+  header .brand b{color:var(--orange)}
+  header .spacer{flex:1}
+  header .meta{font-size:13px;color:#cdd4dc}
+  .wrap{max-width:860px;margin:24px auto;padding:0 18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;margin-bottom:18px}
+  h1{font-size:22px;margin:0 0 6px}
+  h2{font-size:18px;margin:0 0 12px}
+  .sub{color:var(--muted);margin:0 0 18px}
+  button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:#fff;padding:9px 16px}
+  button:hover{border-color:#c2c8cf}
+  .btn-primary{background:var(--orange);border-color:var(--orange);color:#16191f;font-weight:600}
+  .btn-primary:hover{filter:brightness(.96)}
+  .btn-navy{background:var(--navy);border-color:var(--navy);color:#fff}
+  .btn-ghost{background:transparent}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  select{font:inherit;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:#fff}
+  .badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;
+         background:#eef1f4;color:#41505f;white-space:nowrap}
+  .badge.dom{background:#e7f0fb;color:#0a5bd1}
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 11px;border-radius:999px}
+  .pill.ok{background:var(--greenbg);color:var(--green)} .pill.no{background:var(--redbg);color:var(--red)}
+  .pill.skip{background:#eef1f4;color:#54616e}
+  .q{font-size:16px;margin:8px 0 16px;white-space:pre-wrap}
+  .opt{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;
+       padding:12px 14px;margin-bottom:10px;cursor:pointer;background:#fff}
+  .opt:hover{border-color:#bcc3cb;background:#fbfcfd}
+  .opt.sel{border-color:var(--blue);background:#f0f7ff;box-shadow:inset 0 0 0 1px var(--blue)}
+  .opt .mark{flex:0 0 22px;height:22px;border:1.5px solid #aab2bb;border-radius:50%;display:grid;place-items:center;
+             font-size:12px;font-weight:700;color:#fff;margin-top:1px}
+  .opt.multi .mark{border-radius:6px}
+  .opt.sel .mark{background:var(--blue);border-color:var(--blue)}
+  .opt .t{flex:1}
+  /* review states */
+  .opt.correct{border-color:var(--green);background:var(--greenbg)}
+  .opt.correct .mark{background:var(--green);border-color:var(--green)}
+  .opt.wrong{border-color:var(--red);background:var(--redbg)}
+  .opt.wrong .mark{background:var(--red);border-color:var(--red)}
+  .opt .why{display:block;margin-top:6px;font-size:13.5px;color:#4a5560}
+  .progress{height:6px;background:#e7ebef;border-radius:999px;overflow:hidden;margin:2px 0 0}
+  .progress > i{display:block;height:100%;background:var(--orange)}
+  .palette{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .palette b{position:relative;width:30px;height:30px;display:grid;place-items:center;border:1px solid var(--line);border-radius:7px;
+             font-weight:600;font-size:13px;cursor:pointer;background:#fff}
+  .palette b.done{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .palette b.cur{outline:2px solid var(--orange);outline-offset:1px}
+  .palette b.flag::after{content:"";position:absolute;top:-3px;right:-3px;width:10px;height:10px;border-radius:50%;
+             background:var(--orange);border:1.5px solid #fff}
+  .btn-flag{display:inline-flex;align-items:center;gap:6px}
+  .btn-flag.on{background:#fff3e0;border-color:var(--orange);color:#9a5b00;font-weight:600}
+  .badge.flag{background:var(--orange);color:#16191f}
+  .score{font-size:46px;font-weight:800;line-height:1}
+  .stat{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px}
+  .stat div{background:#f7f9fb;border:1px solid var(--line);border-radius:10px;padding:10px 14px;min-width:104px}
+  .stat b{display:block;font-size:22px} .stat span{color:var(--muted);font-size:13px}
+  .res{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+  .res a{display:inline-block;margin:3px 12px 3px 0}
+  .filters{display:flex;gap:8px;margin-bottom:14px}
+  .filters button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .attempt{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:10px;padding:12px 14px;
+           margin-bottom:10px;cursor:pointer;background:#fff}
+  .attempt:hover{border-color:#bcc3cb;background:#fbfcfd}
+  .attempt .pct{font-size:24px;font-weight:800;width:64px;text-align:center}
+  .attempt .meta{flex:1;color:var(--muted);font-size:13px}
+  .muted{color:var(--muted)}
+  .hint{font-size:13px;color:var(--muted);margin:-4px 0 12px}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:2px 0 8px}
+  .seg button{border:0;border-radius:0;background:#fff;padding:9px 20px;font-weight:600;color:var(--muted)}
+  .seg button.on{background:var(--navy);color:#fff}
+  .seg button:disabled{opacity:.45;cursor:not-allowed}
+  .badge.src{background:#fff3e0;color:#9a5b00}
+  .hidden{display:none}
+  footer{max-width:860px;margin:10px auto 40px;padding:0 18px;color:var(--muted);font-size:12.5px}
+</style>
+</head>
+<body>
+<header>
+  <span class="brand">AWS <b>AIP-C01</b> Practice</span>
+  <span class="meta" id="hdrMeta"></span>
+  <span class="spacer"></span>
+  <button class="btn-ghost" style="color:#fff;border-color:#41505f" onclick="App.home()">Home</button>
+  <button class="btn-ghost" style="color:#fff;border-color:#41505f" onclick="App.quit()">Quit</button>
+</header>
+<div class="wrap" id="app">Loading…</div>
+<footer id="foot"></footer>
+
+<script>
+const App = (() => {
+  let bank=null, byId={}, view=null, exam=null, saveTimer=null;
+  const DIFFS=[
+    {key:'easy',     label:'Easy',      desc:'Approachable, mostly single-answer questions to build the fundamentals before the harder sets.'},
+    {key:'hard',     label:'Hard',      desc:'Full exam style: long scenarios, “select TWO”, strong distractors, plus official BenchPrep questions (badged in the quiz).'},
+    {key:'veryhard', label:'Very Hard', desc:'The hardest tier: every question has closely competing options and no obvious answer — the scenario’s decisive constraint picks the winner.'},
+  ];
+  let banks={}, byIds={}, difficulty='easy';
+  DIFFS.forEach(d=>{banks[d.key]=null;byIds[d.key]={};});
+  const el = document.getElementById('app');
+  const $ = (h)=>{const d=document.createElement('div');d.innerHTML=h;return d;};
+  const esc = (s)=>String(s==null?'':s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  const fetchJSON = (u,o)=>fetch(u,o).then(r=>r.json());
+  const shuffle = a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;};
+  const stamp = ()=>{const d=new Date(),p=n=>String(n).padStart(2,'0');
+    return d.getFullYear()+''+p(d.getMonth()+1)+p(d.getDate())+'_'+p(d.getHours())+p(d.getMinutes())+p(d.getSeconds());};
+
+  async function init(){
+    const loaded = await Promise.all(DIFFS.map(d=>fetchJSON('/questions_'+d.key+'.json').catch(()=>null)));
+    DIFFS.forEach((d,i)=>{ banks[d.key]=loaded[i]; byIds[d.key]={}; ((loaded[i]&&loaded[i].questions)||[]).forEach(q=>byIds[d.key][q.id]=q); });
+    const avail = DIFFS.map(d=>d.key).filter(k=>banks[k]);
+    if(!avail.length){ el.textContent='Could not load question banks.'; return; }
+    let saved='easy'; try{ saved=localStorage.getItem('aip_diff')||'easy'; }catch(e){}
+    if(!banks[saved]) saved = avail[0];
+    setDifficulty(saved, true);
+    home();
+  }
+  function setDifficulty(d, silent, persist){
+    if(!banks[d]) return;
+    difficulty=d; bank=banks[d]; byId=byIds[d];
+    if(persist!==false){ try{ localStorage.setItem('aip_diff',d); }catch(e){} }
+    updateFoot();
+    if(!silent && view==='home') home();
+  }
+  function diffLabel(k){ const d=DIFFS.find(x=>x.key===k); return d?d.label:String(k||'').toUpperCase(); }
+  function updateFoot(){
+    const b=bank||{};
+    document.getElementById('foot').textContent =
+      (b.exam||'')+' · '+diffLabel(difficulty)+' bank · '+(((b.questions)||[]).length)+' questions · answers saved as CSV in the results folder';
+  }
+
+  /* ---------- HOME ---------- */
+  function home(){
+    view='home'; exam=null; setMeta('');
+    const total=(bank&&bank.questions?bank.questions.length:0);
+    const desc=(DIFFS.find(d=>d.key===difficulty)||{}).desc||'';
+    const segBtns=DIFFS.map(d=>{
+      const n=banks[d.key]?banks[d.key].questions.length:0;
+      return `<button data-d="${d.key}" class="${difficulty===d.key?'on':''}" ${banks[d.key]?'':'disabled'}>${esc(d.label)} · ${n}</button>`;
+    }).join('');
+    el.innerHTML='';
+    const c=$(`<div class="card">
+      <h1>Start a practice exam</h1>
+      <p class="sub">${esc(bank.exam)}</p>
+      <div class="seg" id="diffSeg">${segBtns}</div>
+      <p class="hint" id="diffDesc">${desc}</p>
+      <div class="row">
+        <label>Questions:
+          <select id="count">
+            <option value="20">20</option>
+            <option value="40">40</option>
+            <option value="65" ${total>=65?'selected':''}>65 (exam length)</option>
+            <option value="all">All ${total}</option>
+          </select>
+        </label>
+        <button class="btn-primary" id="start">Start exam ▶</button>
+      </div>
+      <p class="hint">Pick answers as you go. You can <b>Finish &amp; save</b> anytime — unanswered questions are not marked wrong.</p>
+    </div>
+    <div class="card">
+      <h2>Review past attempts</h2>
+      <p class="sub" style="margin-bottom:14px">Reopen a saved attempt to see what you missed, with explanations and AWS links.</p>
+      <button class="btn-navy" id="att">Open past attempts →</button>
+    </div>`);
+    el.appendChild(c);
+    c.querySelectorAll('#diffSeg button').forEach(b=>b.onclick=()=>{ if(!b.disabled) setDifficulty(b.dataset.d); });
+    el.querySelector('#start').onclick=()=>{const v=el.querySelector('#count').value;start(v==='all'?total:+v);};
+    el.querySelector('#att').onclick=attempts;
+  }
+
+  /* ---------- EXAM ---------- */
+  function start(n){
+    const ids=shuffle(bank.questions.map(q=>q.id)).slice(0,n);
+    exam={ids,idx:0,answers:{},flagged:new Set(),attempt_id:stamp(),started_at:new Date().toISOString(),difficulty};
+    view='exam'; renderExam();
+  }
+  function answeredCount(){return Object.values(exam.answers).filter(a=>a&&a.length).length;}
+  function setMeta(t){document.getElementById('hdrMeta').textContent=t;}
+
+  function renderExam(){
+    const qid=exam.ids[exam.idx], q=byId[qid], multi=q.type==='multi';
+    const sel=exam.answers[qid]||[];
+    const isFlagged=exam.flagged.has(qid);
+    setMeta(`Answered ${answeredCount()} / ${exam.ids.length}`+(exam.flagged.size?` · ${exam.flagged.size} flagged`:''));
+    const t=bank.tasks[q.task]||{};
+    el.innerHTML='';
+    const c=$(`<div class="card">
+      <div class="row" style="justify-content:space-between">
+        <span class="muted">Question ${exam.idx+1} of ${exam.ids.length} · ${esc(diffLabel(exam.difficulty||difficulty))}</span>
+        <span class="row" style="gap:8px">
+          <button id="flag" class="btn-flag ${isFlagged?'on':''}" title="Flag this question to revisit later (shortcut: F)">⚑ ${isFlagged?'Flagged':'Flag'}</button>
+          <button class="btn-primary" id="finish">Finish &amp; save</button>
+        </span>
+      </div>
+      <div class="progress"><i style="width:${(exam.idx+1)/exam.ids.length*100}%"></i></div>
+      <div style="margin:14px 0 4px"><span class="badge dom">Task ${esc(q.task)}</span>
+        <span class="badge">${esc(t.name||'')}</span>
+        ${multi?'<span class="badge" style="background:#ede7f6;color:#5b3da0">Select all that apply</span>':''}
+        ${q.source?`<span class="badge src">${esc(q.source)}</span>`:''}</div>
+      <div class="q">${esc(q.question)}</div>
+      <div id="opts"></div>
+      <div class="row" style="justify-content:space-between;margin-top:6px">
+        <button id="prev" ${exam.idx===0?'disabled':''}>← Prev</button>
+        <button id="next" class="btn-navy">${exam.idx===exam.ids.length-1?'Done →':'Next →'}</button>
+      </div>
+      <div class="palette" id="pal"></div>
+    </div>`);
+    el.appendChild(c);
+    const opts=c.querySelector('#opts');
+    q.options.forEach((o,i)=>{
+      const on=sel.includes(i);
+      const d=$(`<div class="opt ${multi?'multi':''} ${on?'sel':''}">
+        <span class="mark">${on?(multi?'✓':'●'):''}</span><span class="t">${esc(o.text)}</span></div>`).firstChild;
+      d.onclick=()=>choose(qid,i,multi);
+      opts.appendChild(d);
+    });
+    c.querySelector('#prev').onclick=()=>{exam.idx--;renderExam();};
+    c.querySelector('#next').onclick=()=>{ if(exam.idx<exam.ids.length-1){exam.idx++;renderExam();} else finish(); };
+    c.querySelector('#finish').onclick=finish;
+    c.querySelector('#flag').onclick=()=>toggleFlag(qid);
+    const pal=c.querySelector('#pal');
+    exam.ids.forEach((id,i)=>{
+      const done=(exam.answers[id]||[]).length>0;
+      const fl=exam.flagged.has(id);
+      const b=$(`<b class="${done?'done':''} ${i===exam.idx?'cur':''} ${fl?'flag':''}" title="${fl?'Flagged':''}">${i+1}</b>`).firstChild;
+      b.onclick=()=>{exam.idx=i;renderExam();};
+      pal.appendChild(b);
+    });
+  }
+  function toggleFlag(qid){
+    if(exam.flagged.has(qid)) exam.flagged.delete(qid); else exam.flagged.add(qid);
+    renderExam(); scheduleSave();
+  }
+  function choose(qid,i,multi){
+    let cur=exam.answers[qid]||[];
+    if(multi){ cur=cur.includes(i)?cur.filter(x=>x!==i):cur.concat(i); }
+    else { cur=[i]; }
+    exam.answers[qid]=cur; renderExam(); scheduleSave();
+  }
+  function scheduleSave(){ clearTimeout(saveTimer); saveTimer=setTimeout(()=>save(false),500); }
+  function payload(){return {attempt_id:exam.attempt_id,started_at:exam.started_at,difficulty:exam.difficulty,question_ids:exam.ids,answers:exam.answers,flagged:[...exam.flagged]};}
+  async function save(final){
+    try{
+      const r=await fetch('/api/save',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload()),keepalive:true});
+      const j=await r.json();
+      if(final) result(j.summary);
+    }catch(e){ if(final) result(localSummary()); }
+  }
+  function localSummary(){ // fallback if server unreachable
+    let correct=0,answered=0;
+    exam.ids.forEach(id=>{const q=byId[id],s=(exam.answers[id]||[]).slice().sort((a,b)=>a-b);
+      if(s.length){answered++;const ci=q.options.map((o,i)=>o.correct?i:-1).filter(i=>i>=0);
+        if(JSON.stringify(s)===JSON.stringify(ci))correct++;}});
+    return {total:exam.ids.length,answered,correct,incorrect:answered-correct,
+      unanswered:exam.ids.length-answered,flagged:exam.flagged.size,
+      pct:answered?Math.round(correct/answered*100):0,passPct:bank.passPct};
+  }
+  function finish(){ clearTimeout(saveTimer); save(true); }
+
+  /* ---------- RESULT ---------- */
+  function result(s){
+    view='result'; setMeta('');
+    const pass=s.answered>0 && s.pct>=(s.passPct||75);
+    el.innerHTML='';
+    el.appendChild($(`<div class="card">
+      <h1>Attempt saved ✓</h1>
+      <p class="sub">Saved to results/attempt_${esc(exam.attempt_id)}.csv</p>
+      <div class="score">${s.pct}% <span class="pill ${pass?'ok':'no'}" style="font-size:14px;vertical-align:middle">
+        ${pass?'Pass':'Below '+(s.passPct||75)+'%'}</span></div>
+      <p class="muted" style="margin:8px 0 0">Score is of <b>answered</b> questions. Pass mark ${s.passPct||75}%.</p>
+      <div class="stat">
+        <div><b>${s.correct}/${s.answered}</b><span>Correct of answered</span></div>
+        <div><b>${s.answered}/${s.total}</b><span>Coverage</span></div>
+        <div><b style="color:var(--red)">${s.incorrect}</b><span>Incorrect</span></div>
+        <div><b style="color:var(--muted)">${s.unanswered}</b><span>Skipped (not wrong)</span></div>
+        <div><b style="color:var(--orange)">${s.flagged||0}</b><span>Flagged for review</span></div>
+      </div>
+      <div class="row" style="margin-top:18px">
+        <button class="btn-primary" id="rev">Review answers →</button>
+        ${(s.flagged||0)?'<button id="revflag" class="btn-flag on">⚑ Review flagged</button>':''}
+        <button id="hm">Back to home</button>
+      </div>
+    </div>`));
+    el.querySelector('#rev').onclick=()=>reviewItems(buildItemsFromExam(),s,'This attempt');
+    const rf=el.querySelector('#revflag'); if(rf) rf.onclick=()=>reviewItems(buildItemsFromExam(),s,'This attempt',false,'flagged');
+    el.querySelector('#hm').onclick=home;
+  }
+  function buildItemsFromExam(){
+    return exam.ids.map(id=>{const q=byId[id],sel=(exam.answers[id]||[]).slice().sort((a,b)=>a-b);
+      const ci=q.options.map((o,i)=>o.correct?i:-1).filter(i=>i>=0);
+      const status=!sel.length?'unanswered':(JSON.stringify(sel)===JSON.stringify(ci)?'correct':'incorrect');
+      return {q,sel,status,flagged:exam.flagged.has(id)};});
+  }
+
+  /* ---------- ATTEMPTS LIST ---------- */
+  async function attempts(){
+    view='attempts'; setMeta('');
+    el.innerHTML='<div class="card"><h1>Past attempts</h1><p class="muted">Loading…</p></div>';
+    let list=[]; try{list=await fetchJSON('/api/attempts');}catch(e){}
+    const c=$(`<div class="card"><h1>Past attempts</h1>
+      <p class="sub">${list.length?'Click an attempt to review it.':'No saved attempts yet — finish an exam to see it here.'}</p>
+      <div id="list"></div>
+      <button id="hm" style="margin-top:6px">Back to home</button></div>`);
+    el.innerHTML=''; el.appendChild(c);
+    const L=c.querySelector('#list');
+    list.forEach(a=>{
+      const d=$(`<div class="attempt">
+        <div class="pct" style="color:${a.pct>=(bank.passPct||75)?'var(--green)':'var(--red)'}">${a.pct}%</div>
+        <div class="meta"><b style="color:var(--ink)">${esc(a.finished_at||a.file)}</b>
+          <span class="badge">${esc(diffLabel(a.difficulty||'easy'))}</span><br>
+          ${a.correct}/${a.answered} correct · ${a.answered}/${a.total} answered · ${a.unanswered} skipped${a.flagged?` · ${a.flagged} flagged`:''}</div>
+        <div>→</div></div>`).firstChild;
+      d.onclick=()=>openAttempt(a.file);
+      L.appendChild(d);
+    });
+    c.querySelector('#hm').onclick=home;
+  }
+  async function openAttempt(file){
+    el.innerHTML='<div class="card"><p class="muted">Loading attempt…</p></div>';
+    const data=await fetchJSON('/api/attempt?file='+encodeURIComponent(file));
+    const adiff=(data.summary&&data.summary.difficulty)||'easy';
+    if(banks[adiff]) setDifficulty(adiff, true, false);
+    const items=data.rows.map(r=>{
+      const q=byId[r.question_id]||csvFallback(r);
+      const sel=(r.selected_idx||'').split(';').filter(x=>x!=='').map(Number);
+      return {q,sel,status:r.status,flagged:(r.flagged||'')==='yes'};
+    });
+    reviewItems(items,data.summary,esc(data.summary.finished_at||file),true);
+  }
+  function csvFallback(r){ // question no longer in bank — reconstruct minimal view from CSV
+    const correct=(r.correct_idx||'').split(';').filter(x=>x!==''). map(Number);
+    const txts=(r.your_answer?[]:[]); // can't recover all option texts; show what we have
+    return {id:r.question_id,task:r.task,type:r.type,question:r.question,_csv:true,
+      correct_answer:r.correct_answer,your_answer:r.your_answer,explanation:r.explanation,
+      options:[]};
+  }
+
+  /* ---------- REVIEW ---------- */
+  function reviewItems(items,summary,label,fromList,preFilter){
+    view='review'; setMeta('');
+    const nFlagged=items.filter(i=>i.flagged).length;
+    let filter=(preFilter&&(preFilter!=='flagged'||nFlagged))?preFilter:'all';
+    el.innerHTML='';
+    const head=$(`<div class="card">
+      <div class="row" style="justify-content:space-between">
+        <div><h1 style="margin-bottom:2px">Review — ${label}</h1>
+          <span class="muted">${summary?summary.correct+'/'+summary.answered+' correct · '+summary.pct+'% · '+summary.unanswered+' skipped'+(nFlagged?' · '+nFlagged+' flagged':''):''}</span></div>
+        <button id="back">${fromList?'← Attempts':'← Home'}</button>
+      </div>
+      <div class="filters" style="margin-top:14px">
+        <button data-f="all" class="${filter==='all'?'active':''}">All (${items.length})</button>
+        <button data-f="incorrect" class="${filter==='incorrect'?'active':''}">Incorrect (${items.filter(i=>i.status==='incorrect').length})</button>
+        <button data-f="unanswered" class="${filter==='unanswered'?'active':''}">Skipped (${items.filter(i=>i.status==='unanswered').length})</button>
+        <button data-f="flagged" class="${filter==='flagged'?'active':''}">⚑ Flagged (${nFlagged})</button>
+      </div></div>`);
+    el.appendChild(head);
+    const holder=document.createElement('div'); el.appendChild(holder);
+    const match=it=> filter==='all'?true : filter==='flagged'?it.flagged : it.status===filter;
+    const draw=()=>{
+      holder.innerHTML='';
+      items.forEach((it,n)=>{
+        if(!match(it)) return;
+        holder.appendChild(reviewCard(it,n+1));
+      });
+      if(!holder.children.length) holder.appendChild($(`<div class="card muted">Nothing here — nice.</div>`));
+    };
+    head.querySelectorAll('.filters button').forEach(b=>b.onclick=()=>{
+      filter=b.dataset.f; head.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('active',x===b)); draw();
+    });
+    head.querySelector('#back').onclick=()=>fromList?attempts():home();
+    draw();
+  }
+  function reviewCard(it,n){
+    const q=it.q, t=bank.tasks[q.task]||{};
+    const badge=it.status==='correct'?'<span class="pill ok">Correct</span>'
+      :it.status==='incorrect'?'<span class="pill no">Incorrect</span>'
+      :'<span class="pill skip">Skipped</span>';
+    const c=$(`<div class="card">
+      <div class="row" style="justify-content:space-between">
+        <span class="muted">#${n} · <span class="badge dom">Task ${esc(q.task)}</span> ${esc(t.name||'')} ${q.source?`<span class="badge src">${esc(q.source)}</span>`:''} ${it.flagged?'<span class="badge flag">⚑ Flagged</span>':''}</span>${badge}</div>
+      <div class="q" style="margin-top:10px">${esc(q.question)}</div>
+      <div class="opts"></div>
+      <div class="res"></div></div>`).firstChild;
+    const opts=c.querySelector('.opts');
+    if(q._csv){ // fallback rendering
+      opts.appendChild($(`<div class="opt"><span class="t"><b>Your answer:</b> ${esc(q.your_answer||'—')}</span></div>`).firstChild);
+      opts.appendChild($(`<div class="opt correct"><span class="mark">✓</span>
+        <span class="t"><b>Correct:</b> ${esc(q.correct_answer)}<span class="why">${esc(q.explanation)}</span></span></div>`).firstChild);
+    } else {
+      q.options.forEach((o,i)=>{
+        const chosen=it.sel.includes(i), correct=!!o.correct;
+        let cls='opt'; if(correct)cls+=' correct'; else if(chosen)cls+=' wrong';
+        const mk=correct?'✓':(chosen?'✗':'');
+        const tag=chosen?' <b>(your answer)</b>':'';
+        opts.appendChild($(`<div class="${cls}"><span class="mark">${mk}</span>
+          <span class="t">${esc(o.text)}${tag}<span class="why">${esc(o.explanation||'')}</span></span></div>`).firstChild);
+      });
+    }
+    const res=c.querySelector('.res');
+    const links=(t.resources||[]);
+    res.innerHTML='<b>Read more on AWS:</b> '+(links.length?links.map(r=>`<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.label)} ↗</a>`).join(''):'<span class="muted">—</span>');
+    return c;
+  }
+
+  /* ---------- QUIT ---------- */
+  async function quit(){
+    try{await fetch('/api/shutdown',{method:'POST'});}catch(e){}
+    document.body.innerHTML='<div style="max-width:560px;margin:80px auto;font-family:sans-serif;text-align:center">'
+      +'<h2>App stopped 👋</h2><p>Your answers are saved. You can close this tab.<br>'
+      +'To start again, double-click <b>Start AWS Quiz.command</b> or <b>AWS Quiz.app</b>.</p></div>';
+  }
+
+  // best-effort save if the tab is closed/hidden mid-exam
+  document.addEventListener('visibilitychange',()=>{
+    if(document.visibilityState==='hidden' && view==='exam' && exam && answeredCount()>0){
+      try{navigator.sendBeacon('/api/save',new Blob([JSON.stringify(payload())],{type:'application/json'}));}catch(e){}
+    }
+  });
+  window.addEventListener('keydown',e=>{
+    if(view!=='exam')return; const q=byId[exam.ids[exam.idx]];
+    if(e.key==='ArrowRight'){e.preventDefault();exam.idx<exam.ids.length-1?(exam.idx++,renderExam()):finish();}
+    else if(e.key==='ArrowLeft'&&exam.idx>0){e.preventDefault();exam.idx--;renderExam();}
+    else if(e.key==='f'||e.key==='F'){e.preventDefault();toggleFlag(exam.ids[exam.idx]);}
+    else if(/^[1-9]$/.test(e.key)){const i=+e.key-1; if(i<q.options.length)choose(exam.ids[exam.idx],i,q.type==='multi');}
+  });
+
+  init();
+  return {home,quit};
+})();
+</script>
+</body>
+</html>
